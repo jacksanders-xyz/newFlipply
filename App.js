@@ -36,7 +36,7 @@ import _3Shuv_fs_Menu from './js/res/trickMenus/_3Shuv_fs_Menu.js';
 import LaserflipMenu from './js/res/trickMenus/laserflipMenu';
  
 // Urls
-const baseUrl = 'http://localhost:8000/'
+const baseUrl = 'http://192.168.0.26:8000/'
 const usersUrl = `${baseUrl}users/` 
 const loginUrl = `${baseUrl}login/` 
 // IMAGE URI's
@@ -49,7 +49,7 @@ const signUpMenu = "signUpMenu";
 const trickMenu = "trickMenu";
 const trick_menu_nav = "A Tricks Menu Is on"  
 const trick_scene_nav = "A Trick Scene Is happening"  
-const defaultNavigatorType = trickMenu 
+const defaultNavigatorType = mainUserHomepage  
 // trick_scene_nav
 // Trick menu Navigator State
 const OLLIE_MENU = "OLLIE_MENU";
@@ -76,10 +76,10 @@ export default class ViroSample extends Component {
       topNavigatorType : defaultNavigatorType,
       lastClickedTrickMenu : defaultTrickMenu,
       lastClickedTrickScene : defaultTrickScene,
-      user: {},
+      user: '',
       error: ''
     }
-         this._userSignInMenu = this._userSignInMenu.bind(this);
+         this._LandingPage = this._LandingPage.bind(this);
          this._begin_UserSignIn_MENU = this._begin_UserSignIn_MENU.bind(this);
     // login_user will go here
          this._init_UserSignIn_MENU = this._init_UserSignIn_MENU.bind(this);
@@ -101,7 +101,7 @@ export default class ViroSample extends Component {
   render() {
     switch(this.state.topNavigatorType) {
       case mainUserHomepage:
-        return this._userSignInMenu();
+        return this._LandingPage();
       case signInMenu:
         return this._init_UserSignIn_MENU();
       case signUpMenu:
@@ -115,27 +115,13 @@ export default class ViroSample extends Component {
     }
 }
   
-    // if (this.state.topNavigatorType == mainUserHomepage) {
-      // return this._userSignInMenu();
-    // } else if ( this.state.topNavigatorType == signInMenu) {
-    // return this._init_UserSignIn_MENU();
-    // } else if ( this.state.topNavigatorType == signUpMenu) {
-    // return this._init_UserSignUp_MENU();
-    // } else if (this.state.topNavigatorType == trickMenu) {
-    // return this._trickMenuSelector();
-    // } else if (this.state.topNavigatorType == trick_menu_nav) {
-      // return this._init_TrickMenu(this.state.lastClickedTrickMenu);
-    // } else if (this.state.topNavigatorType == trick_scene_nav) {
-       // return this._init_TrickScene(this.state.lastClickedTrickScene);
-    // }
-
-
-  _userSignInMenu() {
+  _LandingPage() {
     return (
       <ImageBackground source={require('./js/res/photos/kickflip.jpg')} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
           <Text style={localStyles.flipplyText}>
           flipply.
           </Text>
+
           <TouchableHighlight style={localStyles.slimButtons}
           onPress={this._begin_UserSignIn_MENU()}
           underlayColor={'#68a0ff'} >
@@ -162,38 +148,37 @@ export default class ViroSample extends Component {
     }
   }
  
-  // login_USER_ = (username, password) => {
-  //     fetch(loginUrl, {
-  //       method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json"  
-  //       },
-  //       body: JSON.stringify({
-  //         user: {
-  //           username: username,
-  //           password: password
-  //         }
-  //       })
-  //     })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //     if(result.token) {
-  //       this.setState({
-  //         user: result.user
-  //       })
-  //     } else {
-  //       this.setState({
-  //         error: result
-  //       })
-  //     }
-  //   })
-  // }
-  
   _init_UserSignIn_MENU() {
     return (
-        <UserSignInMenu user={this.state.user}  error={this.state.error} _userSignedIn={this._userSignedIn()} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
+        <UserSignInMenu user={this.state.user}  error={this.state.error} login_USER={this.login_USER()} _userSignedIn={this._userSignedIn()} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
     ) 
   }
+  login_USER(username, password) {
+      return () => fetch(loginUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+      }).then(response => response.json())
+      .then(result => {
+      if(result) {
+        this.setState({
+          user: username,
+          topNavigatorType: trickMenu
+        })
+      } else {
+        this.setState({
+          error: result
+          })
+        }
+      })
+  }
+  
 
   _begin_UserSignUp_MENU() {
       return () => { this.setState({
@@ -206,17 +191,24 @@ export default class ViroSample extends Component {
     fetch('http://localhost:8000/users/', {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"  
+      "Content-Type": "application/json",
+      "Accept": "application/json"
       },  
       body: JSON.stringify({
+
           username: "hey",
           password: "please",
           stance: "goofy",
       })
-      }).then(response => response.json())  
-        .then(user => this.setState({user}))
-        .then(this._userSignedIn())
+      })
+      .then(() => this._userSignedIn())
+      .catch(() => this._userSignedIn())
   }
+
+// .then(response => response.json())  
+// .then(user => this.setState({user}))
+// .then(this._userSignedIn())
+
   
   _init_UserSignUp_MENU() {
     return (
@@ -239,6 +231,10 @@ export default class ViroSample extends Component {
        
          <Text style={localStyles.flipplyText}>
           flipply 
+          </Text>
+
+          <Text style={localStyles.flipplyText}>
+          welcome back {this.state.user}.
           </Text>
 
           <Text style={localStyles.titleText}>

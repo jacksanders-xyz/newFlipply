@@ -25,7 +25,7 @@ import {
  
   // for the button:
   const handleSubmit = () => {
-    props._userSignedIn()
+    props.signUp_USER_() 
   }
  const handleUsernameChange = (text) => setUsername(text.target.value);
  const handlePasswordChange = (text) => setPassword(text.target.value);

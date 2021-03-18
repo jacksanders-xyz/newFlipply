@@ -16,16 +16,15 @@ import {
 } from 'react-native';
 
   const UserSignInMenu = (props) => {
-  const boardImage = {uri: "https://pngimg.com/uploads/skateboard/skateboard_PNG11748.png"}
-  
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+    const boardImage = {uri: "https://pngimg.com/uploads/skateboard/skateboard_PNG11748.png"}
+    
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    props.login_USER_(username, password, stance)
-
-  }
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      props.login_USER(username, password)
+    }
  
   return (
     <ImageBackground source={boardImage} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
@@ -49,7 +48,9 @@ import {
         <TextInput secureTextEntry={true} style={localStyles.textInput} placeholder="Password" onChange={event => setPassword(event.target.value)}/>
       </View>
         <TouchableHighlight style={localStyles.buttons}
-        onPress={() => props._userSignedIn()}
+
+        onPress={(event) => handleSubmit(event)}
+
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
         sign in 

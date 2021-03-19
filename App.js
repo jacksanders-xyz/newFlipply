@@ -147,41 +147,34 @@ export default class ViroSample extends Component {
       })
     }
   }
- 
-  _init_UserSignIn_MENU() {
-    return (
-        <UserSignInMenu user={this.state.user}  error={this.state.error} login_USER={this.login_USER()} _userSignedIn={this._userSignedIn()} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
-    ) 
-  }
+
   login_USER(username, password) {
-      return () => fetch(loginUrl, {
+      let data = {
+          username: username,
+          password: password
+      }
+      fetch(loginUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
         },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
-      }).then(response => response.json())
-      .then(result => {
-      if(result) {
-        this.setState({
-          user: username,
-          topNavigatorType: trickMenu
-        })
-      } else {
-        this.setState({
-          error: result
-          })
-        }
+        body: JSON.stringify(data),
+      }).then(response => { 
+        if(!response.ok) throw new Error()
       })
+      .then(() => this._userSignedIn);
   }
-  
+
+  _init_UserSignIn_MENU() {
+    return (
+        <UserSignInMenu user={this.state.user} error={this.state.error} login_USER={this.login_USER} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
+    ) 
+  }
 
   _begin_UserSignUp_MENU() {
-      return () => { this.setState({
+      return () => { 
+        this.setState({
         topNavigatorType: signUpMenu 
       })
     }
@@ -195,7 +188,6 @@ export default class ViroSample extends Component {
       "Accept": "application/json"
       },  
       body: JSON.stringify({
-
           username: "hey",
           password: "please",
           stance: "goofy",
@@ -217,9 +209,9 @@ export default class ViroSample extends Component {
   }
 
   _userSignedIn() {
-    return () => {
-      this.setState({ topNavigatorType: trickMenu  })
-    }
+      this.setState({ 
+        topNavigatorType: trickMenu  
+      })
   }
 
   _trickMenuSelector() {
@@ -234,7 +226,7 @@ export default class ViroSample extends Component {
           </Text>
 
           <Text style={localStyles.flipplyText}>
-          welcome back {this.state.user}.
+          welcome back{"\n\n"}{this.state.user}
           </Text>
 
           <Text style={localStyles.titleText}>

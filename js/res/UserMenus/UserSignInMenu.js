@@ -22,13 +22,18 @@ import {
     const [password, setPassword] = useState('')
 
     const handleSubmit = (event) => {
-      event.preventDefault()
-      props.login_USER(username, password)
+      event.preventDefault();
+      props.login_USER("mira", "windowtime")
     }
- 
+
   return (
     <ImageBackground source={boardImage} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
       <View style={localStyles.topMenu}>
+
+          <Text style={localStyles.titleText}>
+            {username} {password}
+          </Text>
+
           <TouchableOpacity 
             style={localStyles.flex}
             activeOpacity={.5} 
@@ -42,15 +47,13 @@ import {
       </View>
     <View style={localStyles.inner}>
       <View style={localStyles.formBox}>
-        <TextInput style={localStyles.textInput} placeholder="Username" onChange={event => setUsername(event.target.value)}/>
+        <TextInput name="username" style={localStyles.textInput} placeholder="Username" onChangeText={text => setUsername(text)}/>
       </View>
       <View style={localStyles.formBox}>
-        <TextInput secureTextEntry={true} style={localStyles.textInput} placeholder="Password" onChange={event => setPassword(event.target.value)}/>
+        <TextInput name="password" secureTextEntry={false} style={localStyles.textInput} placeholder="Password" onChangeText={text => setPassword(text)}/>
       </View>
         <TouchableHighlight style={localStyles.buttons}
-
         onPress={(event) => handleSubmit(event)}
-
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
         sign in 

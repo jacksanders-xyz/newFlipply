@@ -38,7 +38,7 @@ import {
       }).then(response => {
         if(!response.ok) throw new Error
         else {
-          props._userSignedIn()
+          props._userSignedIn(response)
         }
       })
       .catch(err => setError({err}))

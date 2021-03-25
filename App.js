@@ -1,5 +1,6 @@
-  import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { 
+  AsyncStorage,
   AppRegistry,
   Text,
   Image,
@@ -185,10 +186,13 @@ export default class ViroSample extends Component {
     ) 
   }
 
-  _userSignedIn() {
-      this.setState({ 
-        topNavigatorType: trickMenu  
-      })
+  _userSignedIn(response) {
+    const respInJ = response.json()
+    token = respInJ.access
+    const setToken = async()
+    try {
+      await AsyncStorage.setItem(token);
+    }
   }
 
   _trickMenuSelector() {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import { 
   AppRegistry,
   Text,
@@ -81,7 +81,6 @@ export default class ViroSample extends Component {
     }
          this._LandingPage = this._LandingPage.bind(this);
          this._begin_UserSignIn_MENU = this._begin_UserSignIn_MENU.bind(this);
-    // login_user will go here
          this._init_UserSignIn_MENU = this._init_UserSignIn_MENU.bind(this);
          this._begin_UserSignUp_MENU = this._begin_UserSignUp_MENU.bind(this);
          this.signUp_USER_ = this.signUp_USER_.bind(this);
@@ -148,27 +147,10 @@ export default class ViroSample extends Component {
     }
   }
 
-  login_USER(username, password) {
-      let data = {
-          username: username,
-          password: password
-      }
-      fetch(loginUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-        },
-        body: JSON.stringify(data),
-      }).then(response => { 
-        if(!response.ok) throw new Error()
-      })
-      .then(() => this._userSignedIn);
-  }
 
   _init_UserSignIn_MENU() {
     return (
-        <UserSignInMenu user={this.state.user} error={this.state.error} login_USER={this.login_USER} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
+        <UserSignInMenu user={this.state.user} error={this.state.error} loginUrl={loginUrl} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
     ) 
   }
 
@@ -197,11 +179,6 @@ export default class ViroSample extends Component {
       .catch(() => this._userSignedIn())
   }
 
-// .then(response => response.json())  
-// .then(user => this.setState({user}))
-// .then(this._userSignedIn())
-
-  
   _init_UserSignUp_MENU() {
     return (
         <UserSignUpMenu signUp_USER_={this.signUp_USER_} _userSignedIn={this._userSignedIn()} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) }/>

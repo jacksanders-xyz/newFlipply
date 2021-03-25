@@ -20,20 +20,35 @@ import {
     
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      props.login_USER("mira", "windowtime")
+      let data = {
+          username: username,
+          password: password
+      }
+      fetch(props.loginUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+        },
+        body: JSON.stringify(data),
+      }).then(response => {
+        if(!response.ok) throw new Error
+        else {
+          props._userSignedIn()
+        }
+      })
+      .catch(err => setError({err}))
     }
+  
 
   return (
-    <ImageBackground source={boardImage} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
+    error === '' 
+    ? <ImageBackground source={boardImage} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
       <View style={localStyles.topMenu}>
-
-          <Text style={localStyles.titleText}>
-            {username} {password}
-          </Text>
-
           <TouchableOpacity 
             style={localStyles.flex}
             activeOpacity={.5} 
@@ -50,7 +65,7 @@ import {
         <TextInput name="username" style={localStyles.textInput} placeholder="Username" onChangeText={text => setUsername(text)}/>
       </View>
       <View style={localStyles.formBox}>
-        <TextInput name="password" secureTextEntry={false} style={localStyles.textInput} placeholder="Password" onChangeText={text => setPassword(text)}/>
+        <TextInput name="password" secureTextEntry={true} style={localStyles.textInput} placeholder="Password" onChangeText={text => setPassword(text)}/>
       </View>
         <TouchableHighlight style={localStyles.buttons}
         onPress={(event) => handleSubmit(event)}
@@ -58,9 +73,21 @@ import {
         <Text style={localStyles.buttonText}>
         sign in 
         </Text>
-      </TouchableHighlight>
+        </TouchableHighlight>
         </View>
        </ImageBackground> 
+    :  <ImageBackground source={boardImage} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
+          <Text style={localStyles.titleText}>
+            Whoops! that wasn't quite right...
+          </Text>
+          <TouchableHighlight style={localStyles.buttons}
+          onPress={() => setError('')}
+          underlayColor={'#68a0ff'} >
+          <Text style={localStyles.buttonText}>
+          try again
+          </Text>
+          </TouchableHighlight>
+        </ImageBackground> 
   );
 }
  

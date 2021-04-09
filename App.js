@@ -87,7 +87,6 @@ export default class ViroSample extends Component {
          this.signUp_USER_ = this.signUp_USER_.bind(this);
          this._init_UserSignUp_MENU = this._init_UserSignUp_MENU.bind(this);
          this._userSignedIn= this._userSignedIn.bind(this);
-         this._userSignedIn= this._userSignedIn.bind(this);
          this._trickMenuSelector = this._trickMenuSelector.bind(this);
          this._begin_TrickMenu = this._begin_TrickMenu.bind(this);
          this._init_TrickMenu = this._init_TrickMenu.bind(this);
@@ -186,13 +185,15 @@ export default class ViroSample extends Component {
     ) 
   }
 
-  _userSignedIn(response) {
+ _userSignedIn = async (response) => {
     const respInJ = response.json()
     token = respInJ.access
-    const setToken = async()
     try {
       await AsyncStorage.setItem(token);
+    } catch(err) {
+      this.setState({error: err})
     }
+
   }
 
   _trickMenuSelector() {

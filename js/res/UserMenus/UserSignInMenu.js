@@ -36,17 +36,14 @@ import {
           },
           body: JSON.stringify(data),
         }).then(response => {
-          if(!response.ok) throw new Error
-          }).then(props._userSignedIn())
+          if(!response.ok) { throw new Error }
+          else { 
+            return response 
+          }
+          }).then(response => props._userSignedIn(response))
+          .catch((err) => setError(err))
           .catch((err) => setError(err))
       }
-
-
-
-
-    function logIn() {
-      return error == '' ? props._userSignedIn() : null
-    }
 
   return (
     error === '' 

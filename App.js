@@ -1,4 +1,4 @@
-import React,  Component } from 'react';
+import React, { Component } from 'react';
 import { 
   AsyncStorage,
   AppRegistry,
@@ -178,15 +178,14 @@ export default class ViroSample extends Component {
       .catch(() => this._userSignedIn())
   }
 
-   _userSignedIn() {
-   return () => {
-     this.setState({topNavigatorType:trickMenu })
-   }
-      // try {
-      //   await AsyncStorage.setItem(access);
-      // }
-      //  catch(err) {
-      // }
+   _userSignedIn = async (response) => {
+      try {
+        await AsyncStorage.setItem(response);
+        this.setState({ topNavigatorType: trickMenu })
+      }
+       catch(err) {
+         console.log("there was a problem")
+      }
   }
 
   _init_UserSignUp_MENU() {
@@ -325,7 +324,6 @@ export default class ViroSample extends Component {
     );
   }
 // MENUS
-
   _begin_TrickMenu(TrickMenu) {
     return () => {
       this.setState({ 
@@ -334,6 +332,7 @@ export default class ViroSample extends Component {
       })
     } 
   }
+
    VARIALFLIP_MENU 
   _init_TrickMenu(TrickMenu) { 
     menus = {

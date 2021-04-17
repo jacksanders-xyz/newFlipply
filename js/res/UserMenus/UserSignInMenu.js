@@ -23,27 +23,30 @@ import {
     const [error, setError] = useState('')
 
     const handleSubmit = (event) => {
-      event.preventDefault();
-      let data = {
-          username: username,
-          password: password
-      }
-      fetch(props.loginUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-        },
-        body: JSON.stringify(data),
-      }).then(response => {
-        if(!response.ok) throw new Error
-        else {
-          props._userSignedIn(response)
+        event.preventDefault();
+        let data = {
+            username: username,
+            password: password
         }
-      })
-      .catch(err => setError({err}))
+        fetch(props.loginUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+          },
+          body: JSON.stringify(data),
+        }).then(response => {
+          if(!response.ok) throw new Error
+          }).then(props._userSignedIn())
+          .catch((err) => setError(err))
+      }
+
+
+
+
+    function logIn() {
+      return error == '' ? props._userSignedIn() : null
     }
-  
 
   return (
     error === '' 
@@ -81,7 +84,7 @@ import {
             Whoops! that wasn't quite right...
           </Text>
           <TouchableHighlight style={localStyles.buttons}
-          onPress={() => setError('')}
+          onPress={() => setError('')} 
           underlayColor={'#68a0ff'} >
           <Text style={localStyles.buttonText}>
           try again

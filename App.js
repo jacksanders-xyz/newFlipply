@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React,  Component } from 'react';
 import { 
   AsyncStorage,
   AppRegistry,
@@ -147,7 +147,6 @@ export default class ViroSample extends Component {
     }
   }
 
-
   _init_UserSignIn_MENU() {
     return (
         <UserSignInMenu user={this.state.user} error={this.state.error} loginUrl={loginUrl} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
@@ -179,21 +178,21 @@ export default class ViroSample extends Component {
       .catch(() => this._userSignedIn())
   }
 
+   _userSignedIn() {
+   return () => {
+     this.setState({topNavigatorType:trickMenu })
+   }
+      // try {
+      //   await AsyncStorage.setItem(access);
+      // }
+      //  catch(err) {
+      // }
+  }
+
   _init_UserSignUp_MENU() {
     return (
         <UserSignUpMenu signUp_USER_={this.signUp_USER_} _userSignedIn={this._userSignedIn()} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) }/>
     ) 
-  }
-
- _userSignedIn = async (response) => {
-    const respInJ = response.json()
-    token = respInJ.access
-    try {
-      await AsyncStorage.setItem(token);
-    } catch(err) {
-      this.setState({error: err})
-    }
-
   }
 
   _trickMenuSelector() {
@@ -327,7 +326,7 @@ export default class ViroSample extends Component {
   }
 // MENUS
 
-_begin_TrickMenu(TrickMenu) {
+  _begin_TrickMenu(TrickMenu) {
     return () => {
       this.setState({ 
         topNavigatorType: trick_menu_nav,

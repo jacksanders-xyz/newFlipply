@@ -86,7 +86,6 @@ export default class ViroSample extends Component {
          this._begin_UserSignIn_MENU = this._begin_UserSignIn_MENU.bind(this);
          this._init_UserSignIn_MENU = this._init_UserSignIn_MENU.bind(this);
          this._begin_UserSignUp_MENU = this._begin_UserSignUp_MENU.bind(this);
-         this.signUp_USER_ = this.signUp_USER_.bind(this);
          this._init_UserSignUp_MENU = this._init_UserSignUp_MENU.bind(this);
          this._userSignedIn = this._userSignedIn.bind(this);
          this._loadUserProfile = this._loadUserProfile.bind(this);
@@ -164,23 +163,6 @@ export default class ViroSample extends Component {
     }
   }
 
-  signUp_USER_ = () => {
-    fetch('http://localhost:8000/users/', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-      },  
-        body: JSON.stringify({
-          username: "hey",
-          password: "please",
-          stance: "goofy",
-        })
-      })
-      .then(() => this._userSignedIn())
-      .catch(() => this._userSignedIn())
-  }
-
    _userSignedIn = async (response, username, password) => {
       try {
         const accessToken = response.access;
@@ -225,7 +207,7 @@ export default class ViroSample extends Component {
 
   _init_UserSignUp_MENU() {
     return (
-        <UserSignUpMenu signUp_USER_={this.signUp_USER_} _userSignedIn={this._userSignedIn()} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) }/>
+        <UserSignUpMenu signUp_USER_={this.signUp_USER_} usersUrl={usersUrl} loginUrl={loginUrl} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) }/>
     ) 
   }
 
@@ -521,8 +503,6 @@ _init_TrickScene(TrickScene) {
         </View>
       );
 }
-
-
 
 //out of trick menu to main trick menu
   _back_toMainTrickMenu() {

@@ -22,14 +22,62 @@ import {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [stance, setStance] = useState('')
- 
+  const [error, setError] = useState('')
+
   // for the button:
-  const handleSubmit = () => {
-    props.signUp_USER_() 
-  }
- const handleUsernameChange = (text) => setUsername(text.target.value);
- const handlePasswordChange = (text) => setPassword(text.target.value);
-  
+  const handleSubmit = (event) => {
+        event.preventDefault();
+        let data = {
+            username: username,
+            password: password,
+            stance: stance
+        }
+        fetch(props.usersUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+          },
+          body: JSON.stringify(data),
+        }).then(response => {
+            if(!response.ok) { 
+              throw new Error 
+            }
+            else { 
+              return response.json() 
+            }
+          }).then(response => _getUserToken(response))
+          .catch((err) => setError(err))
+          .catch((err) => setError(err))
+      }
+
+      const _getUserToken = (response) => {
+        console.log("hey OVER HERE, this is the response", response)
+        const userName = response.username
+        let data = {
+            username: userName,
+            password: password
+        }
+        fetch(props.loginUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+          },
+          body: JSON.stringify(data),
+        }).then(response => {
+            if(!response.ok) { 
+              throw new Error 
+            }
+            else { 
+              return response.json() 
+            }
+          }).then(response => props._userSignedIn(response, username, password))
+          .catch((err) => setError(err))
+          .catch((err) => setError(err))
+      }
+
+
   return (
     <ImageBackground source={boardImage} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
 
@@ -47,12 +95,11 @@ import {
       </View>
     <View style={localStyles.inner}>
       <View style={localStyles.formBox}>
-        <TextInput style={localStyles.textInput} value={username} placeholder="Username" onChange={handleUsernameChange}/>
+        <TextInput name="username" style={localStyles.textInput} placeholder="Username" onChangeText={text => setUsername(text)}/>
       </View>
       <View style={localStyles.formBox}>
-        <TextInput secureTextEntry={true}  style={localStyles.textInput} value={password} placeholder="Password" onChange={handlePasswordChange}/>
+        <TextInput name="password" secureTextEntry={true} style={localStyles.textInput} placeholder="Password" onChangeText={text => setPassword(text)}/>
       </View>
-    
     <View style={localStyles.outsidePickerBox}>
     <View style={localStyles.pickerBox}>
     <Picker 
@@ -69,7 +116,7 @@ import {
     </View>
       
         <TouchableHighlight style={localStyles.buttons}
-        onPress={() => handleSubmit()}
+        onPress={(event) => handleSubmit(event)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
         sign up 

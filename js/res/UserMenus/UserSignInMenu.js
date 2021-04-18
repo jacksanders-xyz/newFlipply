@@ -36,11 +36,13 @@ import {
           },
           body: JSON.stringify(data),
         }).then(response => {
-          if(!response.ok) { throw new Error }
-          else { 
-            return response.json() 
-          }
-          }).then(response => props._userSignedIn(response))
+            if(!response.ok) { 
+              throw new Error 
+            }
+            else { 
+              return response.json() 
+            }
+          }).then(response => props._userSignedIn(response, username, password))
           .catch((err) => setError(err))
           .catch((err) => setError(err))
       }

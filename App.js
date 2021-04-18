@@ -40,6 +40,7 @@ import LaserflipMenu from './js/res/trickMenus/laserflipMenu';
 const baseUrl = 'http://192.168.0.26:8000/'
 const usersUrl = `${baseUrl}users/` 
 const loginUrl = `${baseUrl}login/` 
+const profileUrl = `${baseUrl}profile/` 
 // IMAGE URI's
 const boardImage = {uri: "https://pngimg.com/uploads/skateboard/skateboard_PNG11709.png"}
 const Image2 = {uri: "https://www.nikesb.com/assets/imager/uploads/7035/nikesb-fpar-keyakiIke_NollieHalfCabFlip_bd624c85e984eb4b3e5bbc5eb4b33f00.jpg"}
@@ -78,6 +79,7 @@ export default class ViroSample extends Component {
       lastClickedTrickMenu : defaultTrickMenu,
       lastClickedTrickScene : defaultTrickScene,
       user: '',
+      stance: '',
       error: ''
     }
          this._LandingPage = this._LandingPage.bind(this);
@@ -86,7 +88,8 @@ export default class ViroSample extends Component {
          this._begin_UserSignUp_MENU = this._begin_UserSignUp_MENU.bind(this);
          this.signUp_USER_ = this.signUp_USER_.bind(this);
          this._init_UserSignUp_MENU = this._init_UserSignUp_MENU.bind(this);
-         this._userSignedIn= this._userSignedIn.bind(this);
+         this._userSignedIn = this._userSignedIn.bind(this);
+         this._loadUserProfile = this._loadUserProfile.bind(this);
          this._trickMenuSelector = this._trickMenuSelector.bind(this);
          this._begin_TrickMenu = this._begin_TrickMenu.bind(this);
          this._init_TrickMenu = this._init_TrickMenu.bind(this);
@@ -168,32 +171,57 @@ export default class ViroSample extends Component {
       "Content-Type": "application/json",
       "Accept": "application/json"
       },  
-      body: JSON.stringify({
+        body: JSON.stringify({
           username: "hey",
           password: "please",
           stance: "goofy",
-      })
+        })
       })
       .then(() => this._userSignedIn())
       .catch(() => this._userSignedIn())
   }
 
-   _userSignedIn = async (response) => {
+   _userSignedIn = async (response, username, password) => {
       try {
-        const accessToken = JSON.stringify(response.access)
-        const refreshToken = JSON.stringify(response.refresh)
+        const accessToken = response.access;
+        const refreshToken = response.refresh;
         await AsyncStorage.setItem("accessToken", accessToken);
         await AsyncStorage.setItem("refreshToken", refreshToken);
-        this.setState({ topNavigatorType: trickMenu })
+        this._loadUserProfile(username, password, accessToken);
       }
        catch(err) {
-         console.log("there was a problem:", err)
+         console.log("there was a problem:", err);
       }
   }
 
-
-
-
+   _loadUserProfile = (username, password, accessToken) => {
+        const myHeaders = new Headers({
+          'Content-Type': "application/json",
+          'Accept': "*/*",
+          'Authorization': 'Bearer ' + accessToken
+        })
+        fetch(profileUrl, {
+            method: "GET",
+            headers: myHeaders,
+         }).then(response => {
+            if(!response.ok) { 
+              throw new Error 
+            }
+            else { 
+              return response.json() 
+            }
+         }).then(response => {
+             console.log("just fetched", response)
+              const USERNAME = JSON.stringify(response.username)
+              const STANCE = JSON.stringify(response.stance)
+              this.setState({ 
+               topNavigatorType: trickMenu,
+               user: USERNAME,
+               stance: STANCE
+             })
+         })
+         .catch(err => console.log("HEY HERE IS THE ERROR ==>", err))
+     } 
 
   _init_UserSignUp_MENU() {
     return (
@@ -213,7 +241,7 @@ export default class ViroSample extends Component {
           </Text>
 
           <Text style={localStyles.flipplyText}>
-          welcome back{"\n\n"}{this.state.user}
+          whats up{"\n\n"}{this.state.user}!!?
           </Text>
 
           <Text style={localStyles.titleText}>

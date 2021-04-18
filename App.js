@@ -180,13 +180,20 @@ export default class ViroSample extends Component {
 
    _userSignedIn = async (response) => {
       try {
-        await AsyncStorage.setItem(response);
+        const accessToken = JSON.stringify(response.access)
+        const refreshToken = JSON.stringify(response.refresh)
+        await AsyncStorage.setItem("accessToken", accessToken);
+        await AsyncStorage.setItem("refreshToken", refreshToken);
         this.setState({ topNavigatorType: trickMenu })
       }
        catch(err) {
-         console.log("there was a problem")
+         console.log("there was a problem:", err)
       }
   }
+
+
+
+
 
   _init_UserSignUp_MENU() {
     return (

@@ -38,7 +38,7 @@ import {
         }).then(response => {
           if(!response.ok) { throw new Error }
           else { 
-            return response 
+            return response.json() 
           }
           }).then(response => props._userSignedIn(response))
           .catch((err) => setError(err))

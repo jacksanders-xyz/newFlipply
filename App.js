@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+// redux stuff
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './reducers';
+// react native stuff
 import { 
   AsyncStorage,
   AppRegistry,
@@ -13,7 +18,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-
+// viro stuff
 import {
   ViroARSceneNavigator,
 } from 'react-viro';
@@ -82,6 +87,7 @@ export default class ViroSample extends Component {
       stance: '',
       error: ''
     }
+  const store = createStore(reducers);
          this._LandingPage = this._LandingPage.bind(this);
          this._begin_UserSignIn_MENU = this._begin_UserSignIn_MENU.bind(this);
          this._init_UserSignIn_MENU = this._init_UserSignIn_MENU.bind(this);

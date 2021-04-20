@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import { AppRegistry,
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { 
+  AppRegistry,
   Text,
   TouchableOpacity,
   Image,
@@ -15,23 +18,18 @@ import {
 } from 'react-viro';
 //
 //
-export default class LaserflipMenu extends Component {
-    constructor() {
-      super();
-    }
+const LaserflipMenu = (props) => {
     
-    render() {
-        return this._displayLASERFLIP_MENU();
-    }
+  const stance = useSelector((state) => state.stance)
 
-  _displayLASERFLIP_MENU() {
+  const _displayLASERFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
          <View style={{height: 550}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -41,7 +39,7 @@ export default class LaserflipMenu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-                Laserflips,
+                Laserflips, 
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -54,7 +52,7 @@ export default class LaserflipMenu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("LASERFLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("LASERFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               laser flip
@@ -65,6 +63,7 @@ export default class LaserflipMenu extends Component {
 
     )
   }
+        return _displayLASERFLIP_MENU();
 }
   
   const localStyles = StyleSheet.create({

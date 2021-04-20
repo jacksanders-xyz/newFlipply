@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { createStore } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { AppRegistry,
+import { 
+  AppRegistry,
   Text,
   TouchableOpacity,
   Image,
@@ -38,7 +39,7 @@ const PopShuv_bs_Menu = (props) => {
 
         <View style={localStyles.textFlex}>
         <Text style={localStyles.titleText}>
-        Backside Pop Shuv-its {stance}
+        Backside Pop Shuv-its 
         </Text>
 
         <Text style={localStyles.descriptiveText}> A beautiful milestone...

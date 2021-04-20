@@ -86,21 +86,6 @@ trickStateManager = () => {
 
 }
 
-
-
-
-  // _onInitialized handles TRACKING 
-  //
-  //
-  // THIS IS FUNCTION will be triggered when everything is good to go! 
-  // It manages when things are setting up
-  // you pass it into the <ViroARScene> tag, it is the onTrackingUpdated attribute
-  // 
-  // all your jsx have access to this!!!!
-  // so if you make inner components, you give them the state of whether or not you're tracking
-  // or not, and can even give a function to handle if shit goes crayz (else if) 
-  // When everything is the steady and ready to render it sets the STATE of text
-  // to "jack".... your text jsx component then grabs it!
  
 _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {

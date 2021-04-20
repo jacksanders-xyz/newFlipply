@@ -12,3 +12,4 @@ const stance = (state=[], action) => {
 export default combineReducers({
   stance,
 })
+

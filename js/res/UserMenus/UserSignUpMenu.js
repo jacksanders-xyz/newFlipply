@@ -17,14 +17,14 @@ import {
 } from 'react-native';
   const UserSignUpMenu = (props) => {
  
-  const boardImage = {uri: "https://pngimg.com/uploads/skateboard/skateboard_PNG11749.png"}
+    const boardImage = {uri: "https://pngimg.com/uploads/skateboard/skateboard_PNG11749.png"}
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [stance, setStance] = useState('')
-  const [error, setError] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [stance, setStance] = useState('')
+    const [error, setError] = useState('')
 
-  // for the button:
+    // for the button:
   const handleSubmit = (event) => {
         event.preventDefault();
         let data = {

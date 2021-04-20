@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // redux stuff
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import reducers from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, useDispatch, useSelector, connect } from 'react-redux';
+import reducer from './redux/reducers';
 // react native stuff
 import { 
   AsyncStorage,
@@ -18,7 +18,8 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-// viro stuff
+
+// VIRO STUFF:
 import {
   ViroARSceneNavigator,
 } from 'react-viro';
@@ -76,9 +77,11 @@ const defaultTrickMenu = ''
 //Trick Scene state starts as an empty string
 const defaultTrickScene = ''
 // "_360FLIP_SCENE"
-export default class ViroSample extends Component {
+
+class ViroSample extends Component {
   constructor() {
     super();
+    this.store = createStore(reducer) 
     this.state = {
       topNavigatorType : defaultNavigatorType,
       lastClickedTrickMenu : defaultTrickMenu,
@@ -87,7 +90,6 @@ export default class ViroSample extends Component {
       stance: '',
       error: ''
     }
-  const store = createStore(reducers);
          this._LandingPage = this._LandingPage.bind(this);
          this._begin_UserSignIn_MENU = this._begin_UserSignIn_MENU.bind(this);
          this._init_UserSignIn_MENU = this._init_UserSignIn_MENU.bind(this);
@@ -149,7 +151,8 @@ export default class ViroSample extends Component {
   }
 
   _begin_UserSignIn_MENU() {
-      return () => { this.setState({
+      return () => { 
+        this.setState({
         topNavigatorType: signInMenu 
       })
     }
@@ -200,8 +203,12 @@ export default class ViroSample extends Component {
             }
          }).then(response => {
              console.log("just fetched", response)
-              const USERNAME = JSON.stringify(response.username)
-              const STANCE = JSON.stringify(response.stance)
+              const USERNAME = response.username
+              const STANCE = response.stance
+              this.store.dispatch({
+                type: "SET_STANCE",
+                stance: STANCE
+              })
               this.setState({ 
                topNavigatorType: trickMenu,
                user: USERNAME,
@@ -219,131 +226,134 @@ export default class ViroSample extends Component {
 
   _trickMenuSelector() {
     return (
-      <ImageBackground source={Image2} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
-      <View style={localStyles.outer} >
+      <Provider store={this.store}>
+
+        <ImageBackground source={Image2} style={localStyles.backImage} imageStyle={{ opacity: 0.7 }}>
+        <View style={localStyles.outer} >
         <View style={localStyles.inner} >
         <ScrollView showsVerticalScrollIndicator={false} >
-       
-         <Text style={localStyles.flipplyText}>
-          flipply 
-          </Text>
 
-          <Text style={localStyles.flipplyText}>
-          whats up{"\n\n"}{this.state.user}!!?
-          </Text>
+        <Text style={localStyles.flipplyText}>
+        flipply 
+        </Text>
 
-          <Text style={localStyles.titleText}>
-          Beginner
-          </Text>
+        <Text style={localStyles.flipplyText}>
+        whats up{"\n\n"}{this.state.user}!!?
+        </Text>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(OLLIE_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Ollie 
-          </Text>
-          </TouchableHighlight>
+        <Text style={localStyles.titleText}>
+        Beginner 
+        </Text>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(POPSHUV_BS_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.longButtonText}>
-          backside{"\n"}pop shuv-it
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(OLLIE_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Ollie 
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(POPSHUV_FS_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.longButtonText}>
-          frontside {"\n"}pop shuv-it
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(POPSHUV_BS_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.longButtonText}>
+        backside{"\n"}pop shuv-it
+        </Text>
+        </TouchableHighlight>
 
-          <Text style={localStyles.titleText}>
-          Intermediate
-          </Text>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(POPSHUV_FS_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.longButtonText}>
+        frontside {"\n"}pop shuv-it
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(KICKFLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Kickflip
-          </Text>
-          </TouchableHighlight>
+        <Text style={localStyles.titleText}>
+        Intermediate
+        </Text>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(HEELFLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Heelflip 
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(KICKFLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Kickflip
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(VARIALFLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Varial flip
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(HEELFLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Heelflip 
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(VARIALHEELFLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Varial Heel
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(VARIALFLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Varial flip
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(HARDFLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Hard flip
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(VARIALHEELFLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Varial Heel
+        </Text>
+        </TouchableHighlight>
 
-          <Text style={localStyles.titleText}>
-          Advanced
-          </Text>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(HARDFLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Hard flip
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(_3SHUV_BS_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.longButtonText}>
-          backside 360 Shuv-it
-          </Text>
-          </TouchableHighlight>
+        <Text style={localStyles.titleText}>
+        Advanced
+        </Text>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(_360FLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          360 flip
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(_3SHUV_BS_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.longButtonText}>
+        backside 360 Shuv-it
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(_3SHUV_FS_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.longButtonText}>
-          frontside 360 shuv-it
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(_360FLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        360 flip
+        </Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight style={localStyles.buttons}
-          onPress={this._begin_TrickMenu(LASERFLIP_MENU)}
-          underlayColor={'#68a0ff'} >
-          <Text style={localStyles.buttonText}>
-          Laser flip
-          </Text>
-          </TouchableHighlight>
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(_3SHUV_FS_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.longButtonText}>
+        frontside 360 shuv-it
+        </Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={localStyles.buttons}
+        onPress={this._begin_TrickMenu(LASERFLIP_MENU)}
+        underlayColor={'#68a0ff'} >
+        <Text style={localStyles.buttonText}>
+        Laser flip
+        </Text>
+        </TouchableHighlight>
 
         </ScrollView>
         </View>
         </View>
-       </ImageBackground> 
+        </ImageBackground> 
+      </Provider>
     );
   }
 // MENUS
@@ -362,9 +372,11 @@ export default class ViroSample extends Component {
       OLLIE_MENU: () => <View style={localStyles.outer}> 
                         <OllieMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
                         </View>,
-      POPSHUV_BS_MENU: () => <View style={localStyles.outer}> 
-                             <PopShuv_bs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
-                             </View>,
+      POPSHUV_BS_MENU: () => <Provider store={this.store}>
+                               <View style={localStyles.outer}> 
+                               <PopShuv_bs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                               </View>
+                             </Provider>,
       POPSHUV_FS_MENU: () => <View style={localStyles.outer}> 
                              <PopShuv_fs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
                              </View>,
@@ -495,7 +507,7 @@ _init_TrickScene(TrickScene) {
         lastClickedTrickScene : defaultTrickScene 
       })
     }
-} 
+  } 
 
   _backARROW_scene() {
     return (
@@ -508,7 +520,7 @@ _init_TrickScene(TrickScene) {
           </TouchableOpacity>
         </View>
       );
-}
+  }
 
 //out of trick menu to main trick menu
   _back_toMainTrickMenu() {
@@ -518,8 +530,8 @@ _init_TrickScene(TrickScene) {
             lastClickedTrickMenu : defaultTrickMenu 
           })
         }
-      } 
-  }
+    } 
+}
 
 const localStyles = StyleSheet.create({
   flex :{
@@ -625,4 +637,4 @@ const localStyles = StyleSheet.create({
   },
 });
 
-module.exports = ViroSample
+export default ViroSample

@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import { AppRegistry,
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { 
+  AppRegistry,
   Text,
   TouchableOpacity,
   Image,
@@ -15,23 +18,18 @@ import {
 } from 'react-viro';
 //
 //
-export default class HardflipMenu extends Component {
-    constructor() {
-      super();
-    }
+const HardflipMenu = (props) => {
     
-    render() {
-        return this._displayHARDFLIP_MENU();
-    }
+  const stance = useSelector((state) => state.stance)
 
-  _displayHARDFLIP_MENU() {
+  const _displayHARDFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
           <View style={{height: 1450}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -41,7 +39,7 @@ export default class HardflipMenu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-                hard flips
+                hard flips {stance}
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -68,7 +66,7 @@ export default class HardflipMenu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("HARDFLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("HARDFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               hardflip
@@ -79,6 +77,7 @@ export default class HardflipMenu extends Component {
 
     )
   }
+        return _displayHARDFLIP_MENU();
 }
   
   const localStyles = StyleSheet.create({

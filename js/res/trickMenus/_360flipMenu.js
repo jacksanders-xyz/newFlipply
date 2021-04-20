@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { AppRegistry,
   Text,
   TouchableOpacity,
@@ -15,24 +17,18 @@ import {
 } from 'react-viro';
 //
 //
-export default class _360flipMenu extends Component {
-  constructor() {
-    super();
-  }
-  
-  render() {
-      return this. _display360FLIP_MENU();
-  }
+const _360flipMenu = (props) => {
 
+  const stance = useSelector((state) => state.stance)
 
-  _display360FLIP_MENU() {
+  const _display360FLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
           <View style={{height: 1820}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -42,7 +38,7 @@ export default class _360flipMenu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-               360 flips
+               360 flips {stance}
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -72,7 +68,7 @@ export default class _360flipMenu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("_360FLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("_360FLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               360 flip
@@ -81,15 +77,10 @@ export default class _360flipMenu extends Component {
           </View>
         </ScrollView>
 
-    )
-}
-
-  // This function "exits" Viro by setting the navigatorType to signInMenu.
-    _exitViro() {
-      this.setState({
-        navigatorType : signInMenu
-      })
+      )
     }
+      return  _display360FLIP_MENU();
+
   }
   
   const localStyles = StyleSheet.create({

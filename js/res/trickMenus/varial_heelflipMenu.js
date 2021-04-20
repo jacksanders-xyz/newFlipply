@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { AppRegistry,
   Text,
   TouchableOpacity,
@@ -15,23 +17,18 @@ import {
 } from 'react-viro';
 //
 //
-export default class VarialheelflipMenu extends Component {
-    constructor() {
-      super();
-    }
+const VarialheelflipMenu = (props) =>{
     
-    render() {
-        return this._displayVARIALHEELFLIP_MENU();
-    }
+  const stance = useSelector((state) => state.stance)
 
-  _displayVARIALHEELFLIP_MENU() {
+  const _displayVARIALHEELFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
           <View style={{height: 1500}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -41,7 +38,7 @@ export default class VarialheelflipMenu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-               Varial heelflips
+               Varial heelflips 
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -68,7 +65,7 @@ export default class VarialheelflipMenu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("VARIALHEELFLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("VARIALHEELFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               varial heelflip
@@ -79,6 +76,7 @@ export default class VarialheelflipMenu extends Component {
 
     )
   }
+        return _displayVARIALHEELFLIP_MENU();
 }
   
   const localStyles = StyleSheet.create({

@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { AppRegistry,
   Text,
   TouchableOpacity,
@@ -15,23 +17,18 @@ import {
 } from 'react-viro';
 //
 //
-export default class _3Shuv_fs_Menu extends Component {
-    constructor() {
-      super();
-    }
+const _3Shuv_fs_Menu = (props) => {
     
-    render() {
-        return this._display3SHUV_FS_MENU();
-    }
+  const stance = useSelector((state) => state.stance)
 
-  _display3SHUV_FS_MENU() {
+  const _display3SHUV_FS_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
           <View style={{height: 500}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -41,7 +38,7 @@ export default class _3Shuv_fs_Menu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-                Frontside 3Shuv
+                Frontside 3Shuv {stance}
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -51,7 +48,7 @@ export default class _3Shuv_fs_Menu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("_3SHUV_FS_SCENE")}
+              onPress={() => props._begin_TrickScene("_3SHUV_FS_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               front side 3shuv
@@ -62,6 +59,7 @@ export default class _3Shuv_fs_Menu extends Component {
 
     )
   }
+        return _display3SHUV_FS_MENU();
 }
   
   const localStyles = StyleSheet.create({

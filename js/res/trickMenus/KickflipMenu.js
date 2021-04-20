@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { AppRegistry,
   Text,
   TouchableOpacity,
@@ -15,23 +17,18 @@ import {
 } from 'react-viro';
 //
 //
-export default class KickflipMenu extends Component {
-    constructor() {
-      super();
-    }
-    
-    render() {
-        return this._displayKICKFLIP_MENU();
-    }
+const KickflipMenu = (props) => {
+   
+  const stance = useSelector((state) => state.stance)
 
-  _displayKICKFLIP_MENU() {
+  const _displayKICKFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
           <View style={{height: 2150}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -41,7 +38,7 @@ export default class KickflipMenu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-               Kickflips....
+               Kickflips...{stance}
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -75,7 +72,7 @@ export default class KickflipMenu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("KICKFLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("KICKFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               kickflip
@@ -86,6 +83,7 @@ export default class KickflipMenu extends Component {
 
     )
   }
+        return _displayKICKFLIP_MENU();
 }
   
   const localStyles = StyleSheet.create({

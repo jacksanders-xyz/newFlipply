@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { AppRegistry,
   Text,
   TouchableOpacity,
@@ -15,80 +17,74 @@ import {
 } from 'react-viro';
 //
 //
-export default class PopShuv_fs_Menu extends Component {
-    constructor() {
-      super();
-    }
-    
-    render() {
-        return this._displayPOPSHUV_FS_MENU();
-    }
+  const PopShuv_fs_Menu = (props) => {
 
-  _displayPOPSHUV_FS_MENU() {
-    return (
-        <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={{height: 1800}}>
-              <TouchableOpacity 
-                style={localStyles.buttonBox}
-                activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
-                >
-                <Image 
-                style={localStyles.topMenu}
-                source={require('../archive/icon_left_w.png')}        
-                />
-              </TouchableOpacity>
+  const stance = useSelector((state) => state.stance)
 
-              <View style={localStyles.textFlex}>
-                <Text style={localStyles.titleText}>
-                frontside Pop Shuv-its.
-                </Text>
+      const _displayPOPSHUV_FS_MENU = () => {
+        return (
+            <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
+              <View style={{height: 1800}}>
+                  <TouchableOpacity 
+                    style={localStyles.buttonBox}
+                    activeOpacity={.5} 
+                    onPress={() => props._back_toMainTrickMenu()}
+                    >
+                    <Image 
+                    style={localStyles.topMenu}
+                    source={require('../archive/icon_left_w.png')}        
+                    />
+                  </TouchableOpacity>
 
-                <Text style={localStyles.descriptiveText}> A more flavorful pop shuv it
-                you're feelin it, go for it! 
-                {"\n\n"}
-                STEPS: 
-                {"\n\n"} Foot position: 
-                front foot is about where it was for the backside version except a little bit further back from the bolts, and a bit straighter.
-                The top of your back foot is at about the apex of the curve in the tail, The majority of your foot that is on the tail is on the inner part of the board. 
-                {"\n"}
-                STEPS:{"\n\n"}
-                1. Pop with push {"\n\n"}  
-                Instead of flicking and scooping behind you (like you did in the backside version), your backfoot is going to push out in front of you.   
-                There will also be some snap involved as well (almost like at the moment of the Ollie, your back foot "points-down".  
-                This will generate the movement which
-                spins the board horizontally away from you.
-                {"\n\n"}
-                2.Front foot movement {"\n\n"} 
-                same as with the backside pop shuv it...  the front foot is flatter... a horizontal point of rotation...fulcrum...etc..., which
-                your board will rotate around. This is very Important as It will
-                control the rotation AND allow you to catch the board with your
-                front foot as it comes around. 
-                {"\n\n"}
-                3.Level Out {"\n\n"} 
+                  <View style={localStyles.textFlex}>
+                    <Text style={localStyles.titleText}>
+                    frontside Pop Shuv-its. {stance}
+                    </Text>
 
-                Same this as well, less "going forward with your front
-                foot" and more picking up your back foot to meet the same level as
-                your front... And think "Ollie first"!
-                {"\n\n"}
-                4. Catch that board and land {"\n\n"} Click below to take a peek!
-                   {"\n\n"} 
-                </Text>
+                    <Text style={localStyles.descriptiveText}> A more flavorful pop shuv it
+                    you're feelin it, go for it! 
+                    {"\n\n"}
+                    STEPS: 
+                    {"\n\n"} Foot position: 
+                    front foot is about where it was for the backside version except a little bit further back from the bolts, and a bit straighter.
+                    The top of your back foot is at about the apex of the curve in the tail, The majority of your foot that is on the tail is on the inner part of the board. 
+                    {"\n"}
+                    STEPS:{"\n\n"}
+                    1. Pop with push {"\n\n"}  
+                    Instead of flicking and scooping behind you (like you did in the backside version), your backfoot is going to push out in front of you.   
+                    There will also be some snap involved as well (almost like at the moment of the Ollie, your back foot "points-down".)  
+                    This will generate the movement which
+                    spins the board horizontally away from you.
+                    {"\n\n"}
+                    2.Front foot movement {"\n\n"} 
+                    same as with the backside pop shuv it...  the front foot is flatter... a horizontal point of rotation...fulcrum...etc..., which
+                    your board will rotate around. This is very Important as It will
+                    control the rotation AND allow you to catch the board with your
+                    front foot as it comes around. 
+                    {"\n\n"}
+                    3.Level Out {"\n\n"} 
+
+                    Same this as well, less "going forward with your front
+                    foot" and more picking up your back foot to meet the same level as
+                    your front... And think "Ollie first"!
+                    {"\n\n"}
+                    4. Catch that board and land {"\n\n"} Click below to take a peek!
+                       {"\n\n"} 
+                    </Text>
+                  </View>
+
+                  <TouchableHighlight style={localStyles.buttons}
+                  onPress={() => props._begin_TrickScene("POPSHUV_FS_SCENE")}
+                  underlayColor={'#68a0ff'} >
+                  <Text style={localStyles.buttonText}>
+                   frontside Pop Shuv-it
+                  </Text>
+                  </TouchableHighlight>
               </View>
-
-              <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("POPSHUV_FS_SCENE")}
-              underlayColor={'#68a0ff'} >
-              <Text style={localStyles.buttonText}>
-               frontside Pop Shuv-it
-              </Text>
-              </TouchableHighlight>
-          </View>
-        </ScrollView>
-
-
+            </ScrollView>
     )
   }
+      return _displayPOPSHUV_FS_MENU();
 }
   
   const localStyles = StyleSheet.create({

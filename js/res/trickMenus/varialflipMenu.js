@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { AppRegistry,
   Text,
   TouchableOpacity,
@@ -15,23 +17,19 @@ import {
 } from 'react-viro';
 //
 //
-export default class VarialflipMenu extends Component {
-    constructor() {
-      super();
-    }
-    
-    render() {
-        return this._displayVARIALFLIP_MENU();
-    }
 
-  _displayVARIALFLIP_MENU() {
+const VarialflipMenu = (props) => {
+    
+  const stance = useSelector((state) => state.stance)
+
+  const _displayVARIALFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
           <View style={{height: 1550}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
-                onPress={() => this.props._back_toMainTrickMenu()}
+                onPress={() => props._back_toMainTrickMenu()}
                 >
                 <Image 
                 style={localStyles.topMenu}
@@ -41,7 +39,7 @@ export default class VarialflipMenu extends Component {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-               Varialflips
+               Varialflips {stance}
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
@@ -68,7 +66,7 @@ export default class VarialflipMenu extends Component {
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => this.props._begin_TrickScene("VARIALFLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("VARIALFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               varial flip
@@ -79,6 +77,7 @@ export default class VarialflipMenu extends Component {
 
     )
   }
+        return _displayVARIALFLIP_MENU();
 }
   
   const localStyles = StyleSheet.create({

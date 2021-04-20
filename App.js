@@ -202,7 +202,6 @@ class ViroSample extends Component {
               return response.json() 
             }
          }).then(response => {
-             console.log("just fetched", response)
               const USERNAME = response.username
               const STANCE = response.stance
               this.store.dispatch({

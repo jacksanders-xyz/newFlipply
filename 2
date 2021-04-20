@@ -17,14 +17,14 @@ import {
 } from 'react-viro';
 //
 //
-const HeelflipMenu = (props) => {
-    
-  const stance = useSelector((state) => state.stance)
 
-  const _displayHEELFLIP_MENU = () => {
+const VarialflipMenu = (props) => {
+    
+
+  const _displayVARIALFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={{height: 1950}}>
+          <View style={{height: 1550}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
@@ -38,46 +38,37 @@ const HeelflipMenu = (props) => {
 
               <View style={localStyles.textFlex}>
                 <Text style={localStyles.titleText}>
-                Heelflips {stance}
+               Varialflips {stance}
                 </Text>
 
                 <Text style={localStyles.descriptiveText}>
-                For some (like myself), the heelflip feels more natural than the
-                kickflip {"\n\n"} The heelflip is an Ollie, plus a 360
-                degree rotatation about the lengthwise axis of the board, away from
-                you, in the opposite direction of the kickflip.{"\n\n"}
-                {"\n\n"}PRE-REQUISITES:{"\n\n"} Same as the kickflip....An Ollie.
-                A backside pop shuv it/frontside Shuv-it might help as you will be
-                generally better at riding a skateboard but everyone is different.
-                (Most people find kickflips easier so you could give them a shot).
-                If you can kickflip it will definitely speed up the process of
-                learning to heelflip, is it will help with understanding the general
-                timing of popping and flicking.
+                What is it? {"\n\n"}
+                A kickflip plus a backside Pop Shuv-it
+                {"\n\n"}PRE-REQUISITES:{"\n\n"} An Ollie. A backside pop shuv
+                it, a kickflip.
                 {"\n\n"}
                 FOOT POSITION:{"\n\n"}
-                Back foot is the same as the kickflip, in the curve of the tail and ready to pop in such a way that the foot snaps down{"\n\n"}
-                Front foot is lower, and on the opposite side of the board. Your toes (I would even say around a fourth) should be hanging off the edge, sticking straight out
-                {"\n\n"}
+                Back foot is the same as the backside Pop Shuv-it. Opposite side of the board, toes hangin off{"\n\n"}
+                Front foot is up higher, the top of your foot should be touching the bottom right bolt (if you're goofy, bottom left if regular).
+                It should be angled and cocked towards the front lip ever so slightly.{"\n\n"}
                 1. Pop. {"\n\n"}
-                The back foot is the same as the ollie, it snaps straight down.{"\n\n"}
+                Back foot is the same as a backside Pop shuv it{"\n\n"}
                 2. Flick{"\n\n"}
-                Instead of rolling and flicking out (as you did in the kickflip), you flick away from you with the bottom corner of your heel
-                {"\n\n"}
+                front foot is the same as the kickflip. The trick is doing them both at the same time and finding the perfect angle/compromise between the two...(think more kickflip) 
                 3.Landing {"\n\n"}
                 You have to commit and trust that the board will be there when you go to land! This confidence will only grow with time but in the meantime 
                 get ready to land 'primo' once or twice before you get the hang of it.{"\n\n"}
-
-                Click below to see the heelflip in augmented reality!
+                Click below to see the varial flip in augmented reality!
 
                 </Text>
 
               </View>
 
               <TouchableHighlight style={localStyles.buttons}
-              onPress={() => props._begin_TrickScene("HEELFLIP_SCENE")}
+              onPress={() => props._begin_TrickScene("VARIALFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
-              heelflip
+              varial flip
               </Text>
               </TouchableHighlight>
           </View>
@@ -85,7 +76,7 @@ const HeelflipMenu = (props) => {
 
     )
   }
-        return _displayHEELFLIP_MENU();
+        return _displayVARIALFLIP_MENU();
 }
   
   const localStyles = StyleSheet.create({
@@ -144,7 +135,6 @@ const HeelflipMenu = (props) => {
       paddingBottom: 20,
       alignSelf: 'center',
       marginBottom: 15,
-      marginTop: 15,
       backgroundColor: 'hsla(205, 83%, 16%, 0.67)',
       borderRadius: 10,
       borderWidth: 1,
@@ -167,11 +157,12 @@ const HeelflipMenu = (props) => {
       top : 0,
     },
     buttonBox: {
-      height : '5.7%',
+      height : 109,
       width : '40%',
       marginTop: 30,
       marginBottom: 10,
     },
   });
 
-module.exports = HeelflipMenu;
+module.exports = VarialflipMenu;
+

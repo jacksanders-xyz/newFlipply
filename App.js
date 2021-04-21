@@ -105,7 +105,6 @@ class ViroSample extends Component {
          this._back_toTricksMenu = this._back_toTricksMenu.bind(this);
          this._backARROW_scene = this._backARROW_scene.bind(this);
          this._back_toMainTrickMenu = this._back_toMainTrickMenu.bind(this);
-
   }
   render() {
     switch(this.state.topNavigatorType) {

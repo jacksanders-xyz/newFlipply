@@ -11,6 +11,7 @@ import {
   PixelRatio,
   TouchableHighlight,
   ScrollView,
+  Switch
 } from 'react-native';
 
 import {
@@ -91,6 +92,7 @@ const PopShuv_bs_Menu = (props) => {
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}> backside Pop Shuv-it </Text>
         </TouchableHighlight> 
+          <Switch/>
         </View> 
         </ScrollView>
     )

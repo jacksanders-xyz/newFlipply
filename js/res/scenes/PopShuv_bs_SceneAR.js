@@ -96,11 +96,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',  
   },
 });
-
-
-
-//
-const goofy = ViroAnimations.registerAnimations({
+const goofy = {
   roll: {
     properties: {
       positionX: "-=0.3",
@@ -156,7 +152,11 @@ const goofy = ViroAnimations.registerAnimations({
     },
     duration: 200, //.5 seconds
   },
-});
+}
+
+
+//
+ViroAnimations.registerAnimations(goofy);
 
 
 

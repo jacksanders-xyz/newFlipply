@@ -20,10 +20,25 @@ import {
 
 const PopShuv_bs_Menu = (props) => {
 
+  const dispatch = useDispatch()
   const stance = useSelector((state) => state.stance)
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const toggleSwitch = () => setIsEnabled(prevState => !prevState);
+  const toggleSwitch = () => { 
+    setIsEnabled(prevState => !prevState) 
+    if(stance == "goofy") {
+      dispatch({
+        type: "SET_STANCE",
+        stance: "regular",
+      })
+    }
+    else if(stance == "regular") {
+      dispatch({
+        type: "SET_STANCE",
+        stance: "goofy",
+      })
+    }
+  };
 
   const _displayPOPSHUV_BS_MENU = () => {
     return (
@@ -89,19 +104,20 @@ const PopShuv_bs_Menu = (props) => {
           </Text>
         </View>
 
-          <TouchableHighlight style={localStyles.buttons}
+          <TouchableHighlight 
+            style={isEnabled ? localStyles.Obuttons : localStyles.Bbuttons}
             onPress={() => props._begin_TrickScene("POPSHUV_BS_SCENE")}
-            underlayColor={'#68a0ff'} >
+            underlayColor={'#68a0ff'} 
+          >
             <Text style={localStyles.buttonText}> backside Pop Shuv-it </Text>
           </TouchableHighlight> 
 
           <View style={localStyles.switchBox}> 
-            <Text style={localStyles.descriptiveText}>Toggle the switch below to see the trick performed in switch! (the opposite of your stance)</Text>
+            <Text style={localStyles.descriptiveText}>Toggle the switch below to see the trick performed in switch! (the opposite of your stance) {stance} </Text>
             <Switch 
               style={localStyles.switchStyle}
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
+              trackColor={{ false: 'hsla(205, 83%, 16%, 0.67)', true: 'hsla(30, 91%, 50%, .9)' }}
+              ios_backgroundColor='#3e3e3e'
               onValueChange={toggleSwitch}
               value={isEnabled} 
             />
@@ -165,14 +181,26 @@ const PopShuv_bs_Menu = (props) => {
       textAlign:'center',
       fontSize : 20
     },
-    buttons : {
+    Bbuttons : {
       height: 80,
       width: 250,
       paddingTop: 20,
       paddingBottom: 20,
       alignSelf: 'center',
       marginBottom: 15,
-      backgroundColor: 'hsla(205, 83%, 16%, 0.67)',
+      backgroundColor: 'hsla(205, 83%, 16%, 0.67)', 
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: '#fff',
+    },
+    Obuttons : {
+      height: 80,
+      width: 250,
+      paddingTop: 20,
+      paddingBottom: 20,
+      alignSelf: 'center',
+      marginBottom: 15,
+      backgroundColor: 'hsla(30, 91%, 50%, .9)', 
       borderRadius: 10,
       borderWidth: 1,
       borderColor: '#fff',
@@ -207,5 +235,6 @@ const PopShuv_bs_Menu = (props) => {
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
   });
+// { isEnabled ? 'hsla(30, 91%, 50%, .9)' : 'hsla(205, 83%, 16%, 0.67)'},
 
 module.exports = PopShuv_bs_Menu;

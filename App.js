@@ -57,8 +57,7 @@ const signUpMenu = "signUpMenu";
 const trickMenu = "trickMenu";
 const trick_menu_nav = "A Tricks Menu Is on"  
 const trick_scene_nav = "A Trick Scene Is happening"  
-const defaultNavigatorType = trickMenu  
-// trick_scene_nav
+const defaultNavigatorType = mainUserHomepage
 // Trick menu Navigator State
 const OLLIE_MENU = "OLLIE_MENU";
 const POPSHUV_BS_MENU = "POPSHUV_BS_MENU";
@@ -73,10 +72,9 @@ const _360FLIP_MENU = "_360FLIP_MENU";
 const _3SHUV_FS_MENU = "_3SHUV_FS_MENU";
 const LASERFLIP_MENU = "LASERFLIP_MENU";
 const defaultTrickMenu = ''
-// _360FLIP_MENU
 //Trick Scene state starts as an empty string
+
 const defaultTrickScene = ''
-// "_360FLIP_SCENE"
 
 class ViroSample extends Component {
   constructor() {

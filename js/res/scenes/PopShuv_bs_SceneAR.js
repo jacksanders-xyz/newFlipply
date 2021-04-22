@@ -1,9 +1,10 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 
 import { StyleSheet, View } from 'react-native';
-
 
 import {
   ViroARScene,
@@ -21,80 +22,70 @@ import {
 } from 'react-viro';
 
 
-export default class PopShuv_bs_SceneAR extends Component {
-  
-  constructor() {
-    super();
+const PopShuv_bs_SceneAR = (props) => {
 
-    this.state = {
-      text : "Initializing AR...",
-      flipMoment: "roll",
-      flipping: false, 
-    };
+
+  const dispatch = useDispatch()
+  const stance = useSelector((state) => state.stance)
+
+  const [bootText, setBootText] = useState("Initializing AR...");
+  const [flipMoment, setflipMoment] = useState("roll");
+  const [flipping, setflipping] = useState(false);
+
+  const trickStarter = () => {
+    return setflipping(true)
   }
 
-  render() {
-    return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
-      <ViroAmbientLight color={"#aaaaaa"} />
-      <ViroNode position={[0.5,-0.2,-1]} dragType="FixedToWorld" onDrag={()=>{}} >
-      <Viro3DObject 
-      source={require('../archive/Skateboard.gltf')}
-      resources={[
-        require('../archive/Skateboard_BaseColor.png'),
-        require('../archive/Skateboard.bin')
-      ]}
-      onClick={() => this.trickStarter() }
-      position={[0.5, -0.2, -1.0]}
-      scale={[0.1, 0.1, 0.1]}
-      animation={{name: this.state.flipMoment,
-          run: this.state.flipping,
-          onFinish: () => this.trickStateManager()
-      }}           
-      type="GLTF"
-      />
-      </ViroNode>
-      </ViroARScene>
-    );
-  }
-
-trickStarter = () => {
-  this.setState({ flipping: true})
-}
-
-
-trickStateManager = () => {
-    if (this.state.flipMoment == "roll") {
-      return this.setState({ flipMoment: "prePop"})
-    } else if (this.state.flipMoment == "prePop") {
-      return this.setState({ flipMoment: "pop"})
-    } else if (this.state.flipMoment == "pop") {
-      return this.setState({ flipMoment: "postPop" })
-    } else if (this.state.flipMoment == "postPop") {
-      return this.setState({ flipMoment: "levelOut" })
-    } else if (this.state.flipMoment == "levelOut") {
-      return this.setState({ flipMoment: "land"})
-    } else if (this.state.flipMoment == "land") {
-      return this.setState({ flipMoment: "rollAway"})
-    } else if (this.state.flipMoment == "rollAway") {
-      return this.setState({ flipping: false, flipMoment: "roll" })
+  const trickStateManager = () => {
+    if (flipMoment == "roll") {
+      return setflipMoment("prePop")
+    } else if (flipMoment == "prePop") {
+      return setflipMoment("pop")
+    } else if (flipMoment == "pop") {
+      return setflipMoment("postPop")
+    } else if (flipMoment == "postPop") {
+      return setflipMoment("levelOut")
+    } else if (flipMoment == "levelOut") {
+      return setflipMoment("land")
+    } else if (flipMoment == "land") {
+      return setflipMoment("rollAway")
+    } else if (flipMoment == "rollAway") {
+       setflipping(false) 
+       setflipMoment("roll") 
     } 
-
-}
- 
-_onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
-        return () => { 
-          this.setState({
-          text : "getting ready to shred..."
-        });
-      }
-    } else if (state == ViroConstants.TRACKING_NONE) {
-      // Handle loss of tracking
-    }
   }
-}
+ 
+  const _onInitialized = (state, reason) => {
+      if (state == ViroConstants.TRACKING_NORMAL) {
+          setBootText("getting ready to shred...")
+      } else if (state == ViroConstants.TRACKING_NONE) {
+      }
+  }
 
+  return (
+    <ViroARScene onTrackingUpdated={_onInitialized} >
+    <ViroAmbientLight color={"#aaaaaa"} />
+    <ViroNode position={[0.5,-0.2,-1]} dragType="FixedToWorld" onDrag={()=>{}} >
+    <Viro3DObject 
+    source={require('../archive/Skateboard.gltf')}
+    resources={[
+      require('../archive/Skateboard_BaseColor.png'),
+      require('../archive/Skateboard.bin')
+    ]}
+    onClick={trickStarter}
+    position={[0.5, -0.2, -1.0]}
+    scale={[0.1, 0.1, 0.1]}
+    animation={{
+        name: flipMoment,
+        run: flipping,
+        onFinish: () => trickStateManager()
+    }}           
+    type="GLTF"
+    />
+    </ViroNode>
+    </ViroARScene>
+  );
+}
 //
 const styles = StyleSheet.create({
   helloWorldTextStyle: {
@@ -109,7 +100,7 @@ const styles = StyleSheet.create({
 
 
 //
-ViroAnimations.registerAnimations({
+const goofy = ViroAnimations.registerAnimations({
   roll: {
     properties: {
       positionX: "-=0.3",

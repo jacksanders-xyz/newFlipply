@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { createStore } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { AppRegistry,
+import { 
+  AppRegistry,
   Text,
   TouchableOpacity,
   Image,
@@ -10,6 +11,7 @@ import { AppRegistry,
   PixelRatio,
   TouchableHighlight,
   ScrollView,
+  Switch
 } from 'react-native';
 
 import {
@@ -19,12 +21,31 @@ import {
 //
 const VarialheelflipMenu = (props) =>{
     
+  const dispatch = useDispatch()
   const stance = useSelector((state) => state.stance)
+  const [isEnabled, setIsEnabled] = useState(false);
+   
+  const toggleSwitch = () => { 
+    setIsEnabled(prevState => !prevState) 
+    if(stance == "goofy") {
+      dispatch({
+        type: "SET_STANCE",
+        stance: "regular",
+      })
+    }
+    else if(stance == "regular") {
+      dispatch({
+        type: "SET_STANCE",
+        stance: "goofy",
+      })
+    }
+  };
+
 
   const _displayVARIALHEELFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={{height: 1500}}>
+          <View style={{height: 1650}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
@@ -64,13 +85,26 @@ const VarialheelflipMenu = (props) =>{
 
               </View>
 
-              <TouchableHighlight style={localStyles.buttons}
+              <TouchableHighlight 
+              style={isEnabled ? localStyles.Obuttons : localStyles.Bbuttons}
               onPress={() => props._begin_TrickScene("VARIALHEELFLIP_SCENE")}
               underlayColor={'#68a0ff'} >
               <Text style={localStyles.buttonText}>
               varial heelflip
               </Text>
               </TouchableHighlight>
+
+              <View style={localStyles.switchBox}> 
+                <Text style={localStyles.descriptiveText}>Toggle the switch below to see the trick performed in switch! (the opposite of your stance) {stance} </Text>
+                <Switch 
+                  style={localStyles.switchStyle}
+                  trackColor={{ false: 'hsla(205, 83%, 16%, 0.67)', true: 'hsla(30, 91%, 50%, .9)' }}
+                  ios_backgroundColor='#3e3e3e'
+                  onValueChange={toggleSwitch}
+                  value={isEnabled} 
+                />
+              </View>
+
           </View>
         </ScrollView>
 
@@ -128,14 +162,26 @@ const VarialheelflipMenu = (props) =>{
       textAlign:'center',
       fontSize : 20
     },
-    buttons : {
+    Bbuttons : {
       height: 80,
       width: 250,
       paddingTop: 20,
       paddingBottom: 20,
       alignSelf: 'center',
       marginBottom: 15,
-      backgroundColor: 'hsla(205, 83%, 16%, 0.67)',
+      backgroundColor: 'hsla(205, 83%, 16%, 0.67)', 
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: '#fff',
+    },
+    Obuttons : {
+      height: 80,
+      width: 250,
+      paddingTop: 20,
+      paddingBottom: 20,
+      alignSelf: 'center',
+      marginBottom: 15,
+      backgroundColor: 'hsla(30, 91%, 50%, .9)', 
       borderRadius: 10,
       borderWidth: 1,
       borderColor: '#fff',
@@ -161,6 +207,13 @@ const VarialheelflipMenu = (props) =>{
       width : '40%',
       marginTop: 30,
       marginBottom: 10,
+    },
+    switchBox: {
+      marginBottom: 25,
+    },
+    switchStyle: {
+      alignSelf: 'center',
+      transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
   });
 

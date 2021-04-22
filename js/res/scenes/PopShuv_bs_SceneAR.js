@@ -22,6 +22,7 @@ import {
 } from 'react-viro';
 
 
+
 const PopShuv_bs_SceneAR = (props) => {
 
 
@@ -31,6 +32,8 @@ const PopShuv_bs_SceneAR = (props) => {
   const [bootText, setBootText] = useState("Initializing AR...");
   const [flipMoment, setflipMoment] = useState("roll");
   const [flipping, setflipping] = useState(false);
+
+    
 
   const trickStarter = () => {
     return setflipping(true)
@@ -62,6 +65,138 @@ const PopShuv_bs_SceneAR = (props) => {
       }
   }
 
+//
+const styles = StyleSheet.create({
+  helloWorldTextStyle: {
+    fontFamily: 'Arial',
+    fontSize: 30,
+    color: '#ffffff',
+    textAlignVertical: 'center',
+    textAlign: 'center',  
+  },
+});
+
+const stanceSelector = () => {
+  if(stance == "goofy") {
+    return {
+      roll: {
+        properties: {
+          positionX: "-=0.3",
+        },
+        duration: 200, //.5 seconds
+      },
+      prePop: {
+        properties: {
+          rotateZ: "-=45",
+          rotateY: "+=45",
+          positionY: "+=0.18",
+          positionX: "-=0.1",
+        },
+        duration: 200, //.5 seconds
+      },
+      pop: {
+        properties: {
+          rotateZ: "-=5",
+          rotateY: "+=45",
+          positionY: "+=0.3",
+          positionX: "-=0.1",
+        },
+        duration: 200, //.5 seconds
+      },
+      postPop: {
+        properties: {
+          rotateZ: "+=35", 
+          rotateY: "+=45",
+          positionX: "-=0.3",
+        },
+        duration: 200, //.5 seconds
+      },
+      levelOut: {
+        properties: {
+          rotateZ: "+=15", 
+          rotateY: "+=45",
+          positionX: "-=0.3",
+        },
+        duration: 200, //.5 seconds
+      },
+      land: {
+        properties: {
+          rotateZ: "-=5", 
+          positionY: "-=0.48",
+          positionX: "-=0.4",
+        },
+        duration: 200, //.5 seconds
+      },
+      rollAway: {
+        properties: {
+          rotateZ: "+=5", 
+          positionX: "-=0.4",
+        },
+        duration: 200, //.5 seconds
+      },
+    }
+  }
+  else if(stance == "regular") {
+    return {
+      roll: {
+        properties: {
+          positionX: "-=0.3",
+        },
+        duration: 200, //.5 seconds
+      },
+      prePop: {
+        properties: {
+          rotateZ: "-=45",
+          rotateY: "-=45",
+          positionY: "+=0.18",
+          positionX: "-=0.1",
+        },
+        duration: 200, //.5 seconds
+      },
+      pop: {
+        properties: {
+          rotateZ: "-=5",
+          rotateY: "-=45",
+          positionY: "+=0.3",
+          positionX: "-=0.1",
+        },
+        duration: 200, //.5 seconds
+      },
+      postPop: {
+        properties: {
+          rotateZ: "+=35", 
+          rotateY: "-=45",
+          positionX: "-=0.3",
+        },
+        duration: 200, //.5 seconds
+      },
+      levelOut: {
+        properties: {
+          rotateZ: "+=15", 
+          rotateY: "-=45",
+          positionX: "-=0.3",
+        },
+        duration: 200, //.5 seconds
+      },
+      land: {
+        properties: {
+          rotateZ: "-=5", 
+          positionY: "-=0.48",
+          positionX: "-=0.4",
+        },
+        duration: 200, //.5 seconds
+      },
+      rollAway: {
+        properties: {
+          rotateZ: "+=5", 
+          positionX: "-=0.4",
+        },
+        duration: 200, //.5 seconds
+      },
+    }
+  }
+}
+ViroAnimations.registerAnimations(stanceSelector());
   return (
     <ViroARScene onTrackingUpdated={_onInitialized} >
     <ViroAmbientLight color={"#aaaaaa"} />
@@ -86,78 +221,4 @@ const PopShuv_bs_SceneAR = (props) => {
     </ViroARScene>
   );
 }
-//
-const styles = StyleSheet.create({
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',  
-  },
-});
-const goofy = {
-  roll: {
-    properties: {
-      positionX: "-=0.3",
-    },
-    duration: 200, //.5 seconds
-  },
-  prePop: {
-    properties: {
-      rotateZ: "-=45",
-      rotateY: "+=45",
-      positionY: "+=0.18",
-      positionX: "-=0.1",
-    },
-    duration: 200, //.5 seconds
-  },
-  pop: {
-    properties: {
-      rotateZ: "-=5",
-      rotateY: "+=45",
-      positionY: "+=0.3",
-      positionX: "-=0.1",
-    },
-    duration: 200, //.5 seconds
-  },
-  postPop: {
-    properties: {
-      rotateZ: "+=35", 
-      rotateY: "+=45",
-      positionX: "-=0.3",
-    },
-    duration: 200, //.5 seconds
-  },
-  levelOut: {
-    properties: {
-      rotateZ: "+=15", 
-      rotateY: "+=45",
-      positionX: "-=0.3",
-    },
-    duration: 200, //.5 seconds
-  },
-  land: {
-    properties: {
-      rotateZ: "-=5", 
-      positionY: "-=0.48",
-      positionX: "-=0.4",
-    },
-    duration: 200, //.5 seconds
-  },
-  rollAway: {
-    properties: {
-      rotateZ: "+=5", 
-      positionX: "-=0.4",
-    },
-    duration: 200, //.5 seconds
-  },
-}
-
-
-//
-ViroAnimations.registerAnimations(goofy);
-
-
-
 module.exports = PopShuv_bs_SceneAR;

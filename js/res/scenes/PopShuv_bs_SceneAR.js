@@ -1,8 +1,7 @@
 'use strict';
 
 import React, { useState } from 'react'
-import { createStore } from 'redux';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { StyleSheet, View } from 'react-native';
 

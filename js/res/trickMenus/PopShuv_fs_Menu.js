@@ -43,7 +43,7 @@ import {
       const _displayPOPSHUV_FS_MENU = () => {
         return (
             <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-              <View style={{height: 1800}}>
+              <View style={{height: 1900}}>
                   <TouchableOpacity 
                     style={localStyles.buttonBox}
                     activeOpacity={.5} 

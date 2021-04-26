@@ -24,15 +24,12 @@ import {
 
 const PopShuv_bs_SceneAR = (props) => {
 
-
   const dispatch = useDispatch()
   const stance = useSelector((state) => state.stance)
 
   const [bootText, setBootText] = useState("Initializing AR...");
   const [flipMoment, setflipMoment] = useState("roll");
   const [flipping, setflipping] = useState(false);
-
-    
 
   const trickStarter = () => {
     return setflipping(true)
@@ -64,16 +61,16 @@ const PopShuv_bs_SceneAR = (props) => {
       }
   }
 
-//
-const styles = StyleSheet.create({
-  helloWorldTextStyle: {
-    fontFamily: 'Arial',
-    fontSize: 30,
-    color: '#ffffff',
-    textAlignVertical: 'center',
-    textAlign: 'center',  
-  },
-});
+  //
+  const styles = StyleSheet.create({
+    helloWorldTextStyle: {
+      fontFamily: 'Arial',
+      fontSize: 30,
+      color: '#ffffff',
+      textAlignVertical: 'center',
+      textAlign: 'center',  
+    },
+  });
 
 const stanceSelector = () => {
   if(stance == "goofy") {
@@ -87,7 +84,7 @@ const stanceSelector = () => {
       prePop: {
         properties: {
           rotateZ: "-=45",
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionY: "+=0.18",
           positionX: "-=0.1",
         },
@@ -96,7 +93,7 @@ const stanceSelector = () => {
       pop: {
         properties: {
           rotateZ: "-=5",
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionY: "+=0.3",
           positionX: "-=0.1",
         },
@@ -105,7 +102,7 @@ const stanceSelector = () => {
       postPop: {
         properties: {
           rotateZ: "+=35", 
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -113,7 +110,7 @@ const stanceSelector = () => {
       levelOut: {
         properties: {
           rotateZ: "+=15", 
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -146,7 +143,7 @@ const stanceSelector = () => {
       prePop: {
         properties: {
           rotateZ: "-=45",
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionY: "+=0.18",
           positionX: "-=0.1",
         },
@@ -155,7 +152,7 @@ const stanceSelector = () => {
       pop: {
         properties: {
           rotateZ: "-=5",
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionY: "+=0.3",
           positionX: "-=0.1",
         },
@@ -164,7 +161,7 @@ const stanceSelector = () => {
       postPop: {
         properties: {
           rotateZ: "+=35", 
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -172,7 +169,7 @@ const stanceSelector = () => {
       levelOut: {
         properties: {
           rotateZ: "+=15", 
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -192,6 +189,7 @@ const stanceSelector = () => {
         },
         duration: 200, //.5 seconds
       },
+
     }
   }
 }
@@ -221,3 +219,5 @@ ViroAnimations.registerAnimations(stanceSelector());
   );
 }
 module.exports = PopShuv_bs_SceneAR;
+
+

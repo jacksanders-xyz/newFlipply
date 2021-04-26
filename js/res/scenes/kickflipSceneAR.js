@@ -1,9 +1,10 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { useState } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import { StyleSheet, View } from 'react-native';
-
 
 import {
   ViroARScene,
@@ -21,80 +22,45 @@ import {
 } from 'react-viro';
 
 
-export default class kickflipSceneAR extends Component {
+const kickflipSceneAR = (props) => {
   
-  constructor() {
-    super();
+  const dispatch = useDispatch()
+  const stance = useSelector((state) => state.stance)
 
-    // Set initial state here, the state where the AR text lives, 
-    this.state = {
-      text : "Initializing AR...",
-      flipMoment: "roll",
-      flipping: false, 
-    };
-    this._onInitialized = this._onInitialized.bind(this);
-  }
+  const [bootText, setBootText] = useState("Initializing AR...");
+  const [flipMoment, setflipMoment] = useState("roll");
+  const [flipping, setflipping] = useState(false);
   
-
-  render() {
-    return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
-      <ViroAmbientLight color={"#aaaaaa"} />
-      <ViroNode position={[0.5,-0.2,-1]} dragType="FixedToWorld" onDrag={()=>{}} >
-      <Viro3DObject 
-      source={require('../archive/Skateboard.gltf')}
-      resources={[
-        require('../archive/Skateboard_BaseColor.png'),
-        require('../archive/Skateboard.bin')
-      ]}
-      onClick={() => this.trickStarter() }
-      position={[0.5, -0.2, -1.0]}
-      scale={[0.1, 0.1, 0.1]}
-      animation={{name: this.state.flipMoment,
-          run: this.state.flipping,
-          onFinish: () => this.trickStateManager()
-      }}           
-      type="GLTF"
-      />
-      </ViroNode>
-      </ViroARScene>
-    );
+  const trickStarter = () => {
+    return setflipping(true)
   }
 
-trickStarter = () => {
-  this.setState({ flipping: true})
-}
-
-
-trickStateManager = () => {
-    if (this.state.flipMoment == "roll") {
-      return this.setState({ flipMoment: "prePop"})
-    } else if (this.state.flipMoment == "prePop") {
-      return this.setState({ flipMoment: "pop"})
-    } else if (this.state.flipMoment == "pop") {
-      return this.setState({ flipMoment: "postPop" })
-    } else if (this.state.flipMoment == "postPop") {
-      return this.setState({ flipMoment: "levelOut" })
-    } else if (this.state.flipMoment == "levelOut") {
-      return this.setState({ flipMoment: "land"})
-    } else if (this.state.flipMoment == "land") {
-      return this.setState({ flipMoment: "rollAway"})
-    } else if (this.state.flipMoment == "rollAway") {
-      return this.setState({ flipping: false, flipMoment: "roll" })
+  const trickStateManager = () => {
+    if (flipMoment == "roll") {
+      return setflipMoment("prePop")
+    } else if (flipMoment == "prePop") {
+      return setflipMoment("pop")
+    } else if (flipMoment == "pop") {
+      return setflipMoment("postPop")
+    } else if (flipMoment == "postPop") {
+      return setflipMoment("levelOut")
+    } else if (flipMoment == "levelOut") {
+      return setflipMoment("land")
+    } else if (flipMoment == "land") {
+      return setflipMoment("rollAway")
+    } else if (flipMoment == "rollAway") {
+       setflipping(false) 
+       setflipMoment("roll") 
     } 
-
-}
-_onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text : "getting ready to shred..."
-      });
-    } else if (state == ViroConstants.TRACKING_NONE) {
-      // Handle loss of tracking
-    }
   }
-}
-
+ 
+  const _onInitialized = (state, reason) => {
+      if (state == ViroConstants.TRACKING_NORMAL) {
+          setBootText("getting ready to shred...")
+      } else if (state == ViroConstants.TRACKING_NONE) {
+      }
+  }
+ 
 //
 const styles = StyleSheet.create({
   helloWorldTextStyle: {
@@ -106,63 +72,142 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-//
-ViroAnimations.registerAnimations({
-  roll: {
-    properties: {
-      positionX: "-=0.3",
-    },
-    duration: 200,
-  },
-  prePop: {
-    properties: {
-      rotateZ: "-=45",
-      positionY: "+=0.18",
-      positionX: "-=0.1",
-    },
-    duration: 200,
-  },
-  pop: {
-    properties: {
-      rotateX: "-=150",
-      positionY: "+=0.3",
-      positionX: "-=0.1",
-    },
-    duration: 300,
-  },
-  postPop: {
-    properties: {
-      rotateZ: "+=35", 
-      rotateX: "-=150",
-      positionX: "-=0.3",
-    },
-    duration: 200,
-  },
-  levelOut: {
-    properties: {
-      rotateZ: "+=10", 
-      rotateX: "-=60",
-      positionX: "-=0.3",
-    },
-    duration: 200,
-  },
-  land: {
-    properties: {
-      positionY: "-=0.48",
-      positionX: "-=0.3",
-    },
-    duration: 200,
-  },
-  rollAway: {
-    properties: {
-      positionX: "-=0.4",
-    },
-    duration: 200,
-  },
-});
-
-
-
+const stanceSelector = () => {
+  if(stance == "goofy") {
+    return {
+      roll: {
+        properties: {
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      prePop: {
+        properties: {
+          rotateZ: "-=45",
+          positionY: "+=0.18",
+          positionX: "-=0.1",
+        },
+        duration: 200,
+      },
+      pop: {
+        properties: {
+          rotateX: "-=150",
+          positionY: "+=0.3",
+          positionX: "-=0.1",
+        },
+        duration: 300,
+      },
+      postPop: {
+        properties: {
+          rotateZ: "+=35", 
+          rotateX: "-=150",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      levelOut: {
+        properties: {
+          rotateZ: "+=10", 
+          rotateX: "-=60",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      land: {
+        properties: {
+          positionY: "-=0.48",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      rollAway: {
+        properties: {
+          positionX: "-=0.4",
+        },
+        duration: 200,
+      },
+    }
+  }
+  else if(stance == "regular") {
+    return {
+      roll: {
+        properties: {
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      prePop: {
+        properties: {
+          rotateZ: "-=45",
+          rotateX: "+=30",
+          positionY: "+=0.18",
+          positionX: "-=0.1",
+        },
+        duration: 200,
+      },
+      pop: {
+        properties: {
+          rotateX: "+=140",
+          positionY: "+=0.3",
+          positionX: "-=0.1",
+        },
+        duration: 300,
+      },
+      postPop: {
+        properties: {
+          rotateZ: "+=35", 
+          rotateX: "+=140",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      levelOut: {
+        properties: {
+          rotateZ: "+=10", 
+          rotateX: "+=50",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      land: {
+        properties: {
+          positionY: "-=0.48",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      rollAway: {
+        properties: {
+          positionX: "-=0.4",
+        },
+        duration: 200,
+      },
+    }
+  }
+}
+ViroAnimations.registerAnimations(stanceSelector());
+  return (
+    <ViroARScene onTrackingUpdated={_onInitialized} >
+    <ViroAmbientLight color={"#aaaaaa"} />
+    <ViroNode position={[0.5,-0.2,-1]} dragType="FixedToWorld" onDrag={()=>{}} >
+    <Viro3DObject 
+    source={require('../archive/Skateboard.gltf')}
+    resources={[
+      require('../archive/Skateboard_BaseColor.png'),
+      require('../archive/Skateboard.bin')
+    ]}
+    onClick={trickStarter}
+    position={[0.5, -0.2, -1.0]}
+    scale={[0.1, 0.1, 0.1]}
+    animation={{
+        name: flipMoment,
+        run: flipping,
+        onFinish: () => trickStateManager()
+    }}           
+    type="GLTF"
+    />
+    </ViroNode>
+    </ViroARScene>
+  );
+}
 module.exports = kickflipSceneAR;

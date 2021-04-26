@@ -189,7 +189,6 @@ const stanceSelector = () => {
         },
         duration: 200, //.5 seconds
       },
-
     }
   }
 }
@@ -219,5 +218,3 @@ ViroAnimations.registerAnimations(stanceSelector());
   );
 }
 module.exports = PopShuv_bs_SceneAR;
-
-

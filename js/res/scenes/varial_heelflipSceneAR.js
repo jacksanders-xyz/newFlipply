@@ -85,65 +85,6 @@ const stanceSelector = () => {
       prePop: {
         properties: {
           rotateZ: "-=45",
-          rotateY: "-=45",
-          positionY: "+=0.18",
-          positionX: "-=0.1",
-        },
-        duration: 200,
-      },
-      pop: {
-        properties: {
-          rotateX: "+=150",
-          rotateY: "-=45",
-          positionY: "+=0.3",
-          positionX: "-=0.1",
-        },
-        duration: 200,
-      },
-      postPop: {
-        properties: {
-          rotateZ: "+=35", 
-          rotateY: "-=45",
-          rotateX: "+=150",
-          positionX: "-=0.3",
-        },
-        duration: 200,
-      },
-      levelOut: {
-        properties: {
-          rotateY: "-=45",
-          rotateZ: "+=10", 
-          rotateX: "+=60",
-          positionX: "-=0.3",
-        },
-        duration: 200,
-      },
-      land: {
-        properties: {
-          positionY: "-=0.48",
-          positionX: "-=0.3",
-        },
-        duration: 200,
-      },
-      rollAway: {
-        properties: {
-          positionX: "-=0.4",
-        },
-        duration: 200,
-      },
-    }
-  }
-  else if(stance == "regular") {
-    return {
-      roll: {
-        properties: {
-          positionX: "-=0.3",
-        },
-        duration: 200,
-      },
-      prePop: {
-        properties: {
-          rotateZ: "-=45",
           rotateY: "+=45",
           positionY: "+=0.18",
           positionX: "-=0.1",
@@ -192,6 +133,65 @@ const stanceSelector = () => {
       },
     }
   }
+  else if(stance == "regular") {
+    return {
+      roll: {
+        properties: {
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      prePop: {
+        properties: {
+          rotateZ: "-=45",
+          rotateY: "-=45",
+          positionY: "+=0.18",
+          positionX: "-=0.1",
+        },
+        duration: 200,
+      },
+      pop: {
+        properties: {
+          rotateX: "+=150",
+          rotateY: "-=45",
+          positionY: "+=0.3",
+          positionX: "-=0.1",
+        },
+        duration: 200,
+      },
+      postPop: {
+        properties: {
+          rotateZ: "+=35", 
+          rotateY: "-=45",
+          rotateX: "+=150",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      levelOut: {
+        properties: {
+          rotateY: "-=45",
+          rotateZ: "+=10", 
+          rotateX: "+=60",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      land: {
+        properties: {
+          positionY: "-=0.48",
+          positionX: "-=0.3",
+        },
+        duration: 200,
+      },
+      rollAway: {
+        properties: {
+          positionX: "-=0.4",
+        },
+        duration: 200,
+      },
+    }
+  }
 }
 ViroAnimations.registerAnimations(stanceSelector());
   return (
@@ -219,3 +219,4 @@ ViroAnimations.registerAnimations(stanceSelector());
   );
 }
 module.exports = varial_heelflipSceneAR;
+

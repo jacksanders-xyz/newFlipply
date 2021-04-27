@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createStore } from 'redux';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { 
@@ -26,6 +26,14 @@ const VarialflipMenu = (props) => {
   const stance = useSelector((state) => state.stance)
   const [isEnabled, setIsEnabled] = useState(false);
 
+  useEffect(() => {
+      if(stance === props.naturalStance) {
+        setIsEnabled(false)
+      } 
+      if(stance !== props.naturalStance) {
+        setIsEnabled(true)
+      }
+  })
   
   const toggleSwitch = () => { 
     setIsEnabled(prevState => !prevState) 
@@ -218,4 +226,3 @@ const VarialflipMenu = (props) => {
   });
 
 module.exports = VarialflipMenu;
-

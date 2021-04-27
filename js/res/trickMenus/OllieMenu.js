@@ -39,7 +39,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 
                 <View style={localStyles.textFlex}>
                   <Text style={localStyles.titleText}>
-                  ...The Ollie {stance}
+                  ...The Ollie 
                   </Text>
 
                   <Text style={localStyles.descriptiveText}>

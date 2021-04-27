@@ -74,6 +74,7 @@ const _3Shuv_fs_Menu = (props) => {
                 <Text style={localStyles.descriptiveText}>
                 To be honest, I cannot do this trick...I have never done this trick so I am not gonna pretend to offer advice. But I can render it in AR!
                 </Text>
+                <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
 
               </View>
 
@@ -208,6 +209,15 @@ const _3Shuv_fs_Menu = (props) => {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 
 module.exports = _3Shuv_fs_Menu;

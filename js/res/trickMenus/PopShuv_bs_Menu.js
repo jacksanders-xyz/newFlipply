@@ -51,7 +51,7 @@ const PopShuv_bs_Menu = (props) => {
   const _displayPOPSHUV_BS_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-        <View style={{height: 2500}}>
+        <View style={{height: 2600}}>
         <TouchableOpacity 
         style={localStyles.buttonBox}
         activeOpacity={.5} 
@@ -108,8 +108,8 @@ const PopShuv_bs_Menu = (props) => {
           if you just think "Ollie first", you will do them. 
           {"\n\n"}
           4. Catch that board and land {"\n\n"} Click below to take a peek!
-          {"\n\n"} 
           </Text>
+            <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
         </View>
 
           <TouchableHighlight 
@@ -242,6 +242,15 @@ const PopShuv_bs_Menu = (props) => {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 // { isEnabled ? 'hsla(30, 91%, 50%, .9)' : 'hsla(205, 83%, 16%, 0.67)'},
 

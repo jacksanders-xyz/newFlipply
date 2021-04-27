@@ -53,7 +53,7 @@ const HeelflipMenu = (props) => {
   const _displayHEELFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={{height: 2150}}>
+          <View style={{height: 2250}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
@@ -97,9 +97,8 @@ const HeelflipMenu = (props) => {
                 get ready to land 'primo' once or twice before you get the hang of it.{"\n\n"}
 
                 Click below to see the heelflip in augmented reality!
-
                 </Text>
-
+                <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
               </View>
 
               <TouchableHighlight 
@@ -232,6 +231,15 @@ const HeelflipMenu = (props) => {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 
 module.exports = HeelflipMenu;

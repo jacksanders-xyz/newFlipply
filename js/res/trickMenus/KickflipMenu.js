@@ -53,7 +53,7 @@ const KickflipMenu = (props) => {
   const _displayKICKFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={{height: 2330}}>
+          <View style={{height: 2430}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
@@ -95,8 +95,8 @@ const KickflipMenu = (props) => {
                 You have to commit and trust that the board will be there when you go to land! This confidence will only grow with time but in the meantime 
                 get ready to land 'primo' once or twice before you get the hang of it.{"\n\n"}
                 Click below to see the kickflip in augmented reality!
-
                 </Text>
+                <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
 
               </View>
 
@@ -230,6 +230,15 @@ const KickflipMenu = (props) => {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 
 module.exports = KickflipMenu;

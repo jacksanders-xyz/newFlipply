@@ -25,7 +25,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
     const _displayOLLIE_MENU = () => {
       return (
           <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-            <View style={{height: 2300}}>
+            <View style={{height: 2400}}>
                   <TouchableOpacity 
                   style={localStyles.buttonBox}
                   activeOpacity={.5} 
@@ -65,10 +65,9 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
                   (When your front foot has slide all the way to the top your board should be greater than 45 degrees)... At this moment
                   your back foot should be coming up as your front foot kicks forward to level out the skateboard in mid air.{"\n\n"} 
                   4. Bend your knees and get ready for impact! {"\n\n"}
-                  Click below to see the Ollie in Augmented reality! {"\n\n"} 
-
+                  Click below to see the Ollie in Augmented reality! 
                   </Text>
-
+                    <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
                 </View>
 
                 <TouchableHighlight style={localStyles.buttons}
@@ -169,6 +168,15 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
       marginTop: 30,
       marginBottom: 10,
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 
 module.exports = OllieMenu;

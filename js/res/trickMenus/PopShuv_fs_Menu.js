@@ -52,7 +52,7 @@ import {
       const _displayPOPSHUV_FS_MENU = () => {
         return (
             <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-              <View style={{height: 1900}}>
+              <View style={{height: 2000}}>
                   <TouchableOpacity 
                     style={localStyles.buttonBox}
                     activeOpacity={.5} 
@@ -69,8 +69,7 @@ import {
                     frontside Pop Shuv-its. 
                     </Text>
 
-                    <Text style={localStyles.descriptiveText}> A more flavorful pop shuv it
-                    you're feelin it, go for it! 
+                    <Text style={localStyles.descriptiveText}> A more flavorful pop shuv it...if you're feelin it, go for it! 
                     {"\n\n"}
                     STEPS: 
                     {"\n\n"} Foot position: 
@@ -96,9 +95,9 @@ import {
                     foot" and more picking up your back foot to meet the same level as
                     your front... And think "Ollie first"!
                     {"\n\n"}
-                    4. Catch that board and land {"\n\n"} Click below to take a peek!
-                       {"\n\n"} 
+                    4. Catch that board and land {"\n\n"}Click below to take a peek!
                     </Text>
+                    <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
                   </View>
 
                   <TouchableHighlight 
@@ -232,6 +231,15 @@ import {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 
 module.exports = PopShuv_fs_Menu;

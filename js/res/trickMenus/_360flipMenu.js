@@ -53,7 +53,7 @@ const _360flipMenu = (props) => {
   const _display360FLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-          <View style={{height: 1990}}>
+          <View style={{height: 2090}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
@@ -91,8 +91,8 @@ const _360flipMenu = (props) => {
                   Back foot comes up mid air just like any other trick, this will seem impossible as you just flicked it behind you 
                   as hard as you possibly can, but yes pick that back foot up.{"\n\n"}
                   Click below to see the 360 flip in augmented reality!
-
                 </Text>
+                <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
 
               </View>
 
@@ -227,6 +227,15 @@ const _360flipMenu = (props) => {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 module.exports = _360flipMenu;
 

@@ -53,7 +53,7 @@ const LaserflipMenu = (props) => {
   const _displayLASERFLIP_MENU = () => {
     return (
         <ScrollView style={localStyles.scrollFlex} contentContainerStyle={{ flexGrow: 1 }} >
-         <View style={{height: 680}}>
+         <View style={{height: 780}}>
                 <TouchableOpacity 
                 style={localStyles.buttonBox}
                 activeOpacity={.5} 
@@ -76,6 +76,7 @@ const LaserflipMenu = (props) => {
                 {"\n\n"}
                 Yeah I definitely can't do this, so no advice.... but I commend you for shredding this hard. Here it is in AR:
                 </Text>
+                <Text style={localStyles.brightText}> (drag the board around to resize as you like, and then release to see the trick) {"\n\n"} </Text>
 
               </View>
 
@@ -209,6 +210,15 @@ const LaserflipMenu = (props) => {
       alignSelf: 'center',
       transform: [{ scaleX: 1.6 }, { scaleY: 1.4 }]
     },
+    brightText: {
+      fontFamily: 'Futura',
+      flexWrap: 'wrap',
+      width: '90%',
+      margin: 10,
+      color:'hsla(30, 91%, 50%, .9)',
+      textAlign:'justify',
+      fontSize : 16
+    }
   });
 
 module.exports = LaserflipMenu;

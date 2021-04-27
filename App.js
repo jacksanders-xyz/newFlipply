@@ -369,10 +369,10 @@ class ViroSample extends Component {
                         <OllieMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
                         </View></Provider>,
       POPSHUV_BS_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                             <PopShuv_bs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                             <PopShuv_bs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                              </View></Provider>,
       POPSHUV_FS_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                             <PopShuv_fs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                             <PopShuv_fs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                              </View></Provider>,
       KICKFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
                            <KickflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />

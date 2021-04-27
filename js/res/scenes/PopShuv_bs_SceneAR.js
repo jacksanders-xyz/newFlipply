@@ -84,7 +84,7 @@ const stanceSelector = () => {
       prePop: {
         properties: {
           rotateZ: "-=45",
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionY: "+=0.18",
           positionX: "-=0.1",
         },
@@ -93,7 +93,7 @@ const stanceSelector = () => {
       pop: {
         properties: {
           rotateZ: "-=5",
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionY: "+=0.3",
           positionX: "-=0.1",
         },
@@ -102,7 +102,7 @@ const stanceSelector = () => {
       postPop: {
         properties: {
           rotateZ: "+=35", 
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -110,7 +110,7 @@ const stanceSelector = () => {
       levelOut: {
         properties: {
           rotateZ: "+=15", 
-          rotateY: "-=45",
+          rotateY: "+=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -143,7 +143,7 @@ const stanceSelector = () => {
       prePop: {
         properties: {
           rotateZ: "-=45",
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionY: "+=0.18",
           positionX: "-=0.1",
         },
@@ -152,7 +152,7 @@ const stanceSelector = () => {
       pop: {
         properties: {
           rotateZ: "-=5",
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionY: "+=0.3",
           positionX: "-=0.1",
         },
@@ -161,7 +161,7 @@ const stanceSelector = () => {
       postPop: {
         properties: {
           rotateZ: "+=35", 
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -169,7 +169,7 @@ const stanceSelector = () => {
       levelOut: {
         properties: {
           rotateZ: "+=15", 
-          rotateY: "+=45",
+          rotateY: "-=45",
           positionX: "-=0.3",
         },
         duration: 200, //.5 seconds
@@ -189,6 +189,7 @@ const stanceSelector = () => {
         },
         duration: 200, //.5 seconds
       },
+
     }
   }
 }

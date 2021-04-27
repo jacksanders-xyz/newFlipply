@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { 
   AppRegistry,
@@ -22,6 +22,15 @@ const PopShuv_bs_Menu = (props) => {
   const dispatch = useDispatch()
   const stance = useSelector((state) => state.stance)
   const [isEnabled, setIsEnabled] = useState(false);
+
+  useEffect(() => {
+      if(stance === props.naturalStance) {
+        setIsEnabled(false)
+      } 
+      if(stance !== props.naturalStance) {
+        setIsEnabled(true)
+      }
+  })
 
   const toggleSwitch = () => { 
     setIsEnabled(prevState => !prevState) 

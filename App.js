@@ -95,6 +95,7 @@ class ViroSample extends Component {
          this._init_UserSignUp_MENU = this._init_UserSignUp_MENU.bind(this);
          this._userSignedIn = this._userSignedIn.bind(this);
          this._loadUserProfile = this._loadUserProfile.bind(this);
+         this._greetingRandomizer = this._greetingRandomizer.bind(this);
          this._trickMenuSelector = this._trickMenuSelector.bind(this);
          this._begin_TrickMenu = this._begin_TrickMenu.bind(this);
          this._init_TrickMenu = this._init_TrickMenu.bind(this);
@@ -220,6 +221,21 @@ class ViroSample extends Component {
     ) 
   }
 
+  _greetingRandomizer() {
+    const greetings = {
+      0: "whats up, " + this.state.user + "!!?",
+      1: "hey, " + this.state.user + " ready to shred!!?",
+      2: "great to see you " + this.state.user + ' "AKA" the coolest kid at the skate park',
+      3: this.state.user + " remember, pain is just weakness leaving body after your board hits you in the shin repeatedly",
+      4: this.state.user + " remember to look cool",
+      5: "its been a minute " + this.state.user + "...",
+      6: this.state.user + "! remember to put some ice on that",
+      7: "have a good skate sesh! " + this.state.user,
+      8: "sup " + this.state.user + ", I hope there aren't too many skooter kids around...",
+    } 
+    return greetings[Math.floor(Math.random() * 9)]
+  } 
+
   _trickMenuSelector() {
     return (
       <Provider store={this.store}>
@@ -233,8 +249,8 @@ class ViroSample extends Component {
         flipply 
         </Text>
 
-        <Text style={localStyles.flipplyText}>
-        whats up{"\n\n"}{this.state.user}!!?
+        <Text style={localStyles.welcomeText}>
+        {this._greetingRandomizer()}
         </Text>
 
         <Text style={localStyles.titleText}>
@@ -628,6 +644,14 @@ const localStyles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     backgroundColor: 'hsla(205, 83%, 16%, 0.87)'
+  },
+  welcomeText: {    
+    fontFamily: 'Futura-CondensedExtraBold',
+    fontWeight: 'bold',
+    color:'black',
+    textAlign:'center',
+    marginBottom: 5,
+    fontSize : 20 
   },
 });
 

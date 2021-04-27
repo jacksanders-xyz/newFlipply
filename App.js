@@ -375,31 +375,31 @@ class ViroSample extends Component {
                              <PopShuv_fs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                              </View></Provider>,
       KICKFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                           <KickflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                           <KickflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                            </View></Provider>,
       HEELFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                           <HeelflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                           <HeelflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                            </View></Provider>,
       VARIALFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                             <VarialflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                             <VarialflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                              </View></Provider>,
       VARIALHEELFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                                 <VarialheelflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                                 <VarialheelflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                                  </View></Provider>,
       HARDFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                           <HardflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                           <HardflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                            </View></Provider>,
       _3SHUV_BS_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                            <_3Shuv_bs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                            <_3Shuv_bs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                             </View></Provider>,
       _360FLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}>
-                           <_360flipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                           <_360flipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                            </View></Provider>,
       _3SHUV_FS_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                            <_3Shuv_fs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                            <_3Shuv_fs_Menu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                             </View></Provider>,
       LASERFLIP_MENU: () => <Provider store={this.store}><View style={localStyles.outer}> 
-                            <LaserflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} _begin_TrickScene={this._begin_TrickScene()} />
+                            <LaserflipMenu _back_toMainTrickMenu={this._back_toMainTrickMenu()} naturalStance={this.state.stance} _begin_TrickScene={this._begin_TrickScene()} />
                             </View></Provider>,
     }
     return menus[TrickMenu]()

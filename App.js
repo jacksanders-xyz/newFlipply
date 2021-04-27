@@ -17,12 +17,16 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   ScrollView,
+  YellowBox
 } from 'react-native';
 
 // VIRO STUFF:
 import {
   ViroARSceneNavigator,
 } from 'react-viro';
+
+//for now, please no warnings
+YellowBox.ignoreWarnings(['Warning: Async Storage has been extracted from react-native core']);
 
 // MenuComponents: 
 import UserSignInMenu from './js/res/UserMenus/UserSignInMenu';

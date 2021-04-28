@@ -64,7 +64,7 @@ const loadingScreen = "loadingScreen";
 const trickMenu = "trickMenu";
 const trick_menu_nav = "A Tricks Menu Is on"  
 const trick_scene_nav = "A Trick Scene Is happening"  
-const defaultNavigatorType = loadingScreen 
+const defaultNavigatorType = mainUserHomepage
 // Trick menu Navigator State
 const OLLIE_MENU = "OLLIE_MENU";
 const POPSHUV_BS_MENU = "POPSHUV_BS_MENU";

@@ -7,6 +7,8 @@ import reducer from './redux/reducers';
 import { 
   AsyncStorage,
   AppRegistry,
+  Animated,
+  Easing,
   Text,
   Image,
   View,
@@ -91,8 +93,9 @@ class ViroSample extends Component {
       lastClickedTrickScene : defaultTrickScene,
       user: '',
       stance: '',
-      error: ''
+      error: '',
     }
+    this.spinAnim = new Animated.Value(0)
          this._LandingPage = this._LandingPage.bind(this);
          this._begin_UserSignIn_MENU = this._begin_UserSignIn_MENU.bind(this);
          this._init_UserSignIn_MENU = this._init_UserSignIn_MENU.bind(this);
@@ -233,11 +236,30 @@ class ViroSample extends Component {
      } 
 
   _init_loadingScreen() {
+    Animated.loop(
+      Animated.timing(
+        this.spinAnim, {
+          toValue: 1,
+          duration: 3000,
+          easing: Easing.linear, 
+          useNativeDriver: true,
+      })).start()
+
+    const spinning = this.spinAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    })
     return (
       <View style={localStyles.loadingBackImage} >
         <Text style={localStyles.welcomeText}>loading....one moment</Text>
-          <Image 
-            style={localStyles.loadingSkull}
+          <Animated.Image 
+            style={{
+              transform: [{rotate: spinning }], 
+              alignSelf: "center",
+              marginTop: 10,
+              height : '20%',
+              width : '40%'
+            }}
             source={require('./js/res/photos/loading_skull5.png')} 
           />
       </View>

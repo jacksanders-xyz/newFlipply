@@ -265,7 +265,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(OLLIE_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Ollie 
+        ollie 
         </Text>
         </TouchableHighlight>
 
@@ -293,7 +293,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(KICKFLIP_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Kickflip
+        kickflip
         </Text>
         </TouchableHighlight>
 
@@ -301,7 +301,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(HEELFLIP_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Heelflip 
+        heelflip 
         </Text>
         </TouchableHighlight>
 
@@ -309,7 +309,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(VARIALFLIP_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Varial flip
+        varial flip
         </Text>
         </TouchableHighlight>
 
@@ -317,7 +317,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(VARIALHEELFLIP_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Varial Heel
+        varial Heel
         </Text>
         </TouchableHighlight>
 
@@ -325,7 +325,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(HARDFLIP_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Hard flip
+        hard flip
         </Text>
         </TouchableHighlight>
 
@@ -337,7 +337,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(_3SHUV_BS_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.longButtonText}>
-        backside 360 Shuv-it
+        backside 360 shuv-it
         </Text>
         </TouchableHighlight>
 
@@ -361,7 +361,7 @@ class ViroSample extends Component {
         onPress={this._begin_TrickMenu(LASERFLIP_MENU)}
         underlayColor={'#68a0ff'} >
         <Text style={localStyles.buttonText}>
-        Laser flip
+        laser flip
         </Text>
         </TouchableHighlight>
 

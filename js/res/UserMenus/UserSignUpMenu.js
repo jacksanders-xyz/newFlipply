@@ -32,6 +32,7 @@ import {
             password: password,
             stance: stance
         }
+        props._begin_loadingScreen()
         fetch(props.usersUrl, {
         method: "POST",
         headers: {

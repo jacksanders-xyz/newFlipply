@@ -28,6 +28,7 @@ import {
             username: username,
             password: password
         }
+        props._begin_loadingScreen()
         fetch(props.loginUrl, {
         method: "POST",
         headers: {

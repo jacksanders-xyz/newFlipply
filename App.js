@@ -58,10 +58,11 @@ const Image2 = {uri: "https://www.nikesb.com/assets/imager/uploads/7035/nikesb-f
 const mainUserHomepage = "mainUserHomepage";
 const signInMenu = "signInMenu";
 const signUpMenu = "signUpMenu";
+const loadingScreen = "loadingScreen";
 const trickMenu = "trickMenu";
 const trick_menu_nav = "A Tricks Menu Is on"  
 const trick_scene_nav = "A Trick Scene Is happening"  
-const defaultNavigatorType = mainUserHomepage
+const defaultNavigatorType = loadingScreen 
 // Trick menu Navigator State
 const OLLIE_MENU = "OLLIE_MENU";
 const POPSHUV_BS_MENU = "POPSHUV_BS_MENU";
@@ -99,6 +100,8 @@ class ViroSample extends Component {
          this._init_UserSignUp_MENU = this._init_UserSignUp_MENU.bind(this);
          this._userSignedIn = this._userSignedIn.bind(this);
          this._loadUserProfile = this._loadUserProfile.bind(this);
+         this._begin_loadingScreen = this._begin_loadingScreen.bind(this);
+         this._init_loadingScreen = this._init_loadingScreen.bind(this);
          this._greetingRandomizer = this._greetingRandomizer.bind(this);
          this._trickMenuSelector = this._trickMenuSelector.bind(this);
          this._begin_TrickMenu = this._begin_TrickMenu.bind(this);
@@ -117,6 +120,8 @@ class ViroSample extends Component {
         return this._init_UserSignIn_MENU();
       case signUpMenu:
         return this._init_UserSignUp_MENU();
+      case loadingScreen:
+        return this._init_loadingScreen();
       case trickMenu:
         return this._trickMenuSelector();
       case trick_menu_nav:
@@ -160,9 +165,17 @@ class ViroSample extends Component {
     }
   }
 
+  _begin_loadingScreen() {
+      return () => { 
+        this.setState({
+        topNavigatorType: loadingScreen 
+      })
+    }
+  }
+
   _init_UserSignIn_MENU() {
     return (
-        <UserSignInMenu user={this.state.user} error={this.state.error} loginUrl={loginUrl} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
+        <UserSignInMenu user={this.state.user} error={this.state.error} loginUrl={loginUrl} _begin_loadingScreen={this._begin_loadingScreen} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) } />
     ) 
   }
 
@@ -219,9 +232,21 @@ class ViroSample extends Component {
          .catch(err => console.log("HEY HERE IS THE ERROR ==>", err))
      } 
 
+  _init_loadingScreen() {
+    return (
+      <View style={localStyles.loadingBackImage} >
+        <Text style={localStyles.welcomeText}>loading....one moment</Text>
+          <Image 
+            style={localStyles.loadingSkull}
+            source={require('./js/res/photos/loading_skull5.png')} 
+          />
+      </View>
+    )
+  } 
+
   _init_UserSignUp_MENU() {
     return (
-        <UserSignUpMenu signUp_USER_={this.signUp_USER_} usersUrl={usersUrl} loginUrl={loginUrl} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) }/>
+        <UserSignUpMenu signUp_USER_={this.signUp_USER_} usersUrl={usersUrl} loginUrl={loginUrl} _begin_loadingScreen={this._begin_loadingScreen} _userSignedIn={this._userSignedIn} _back_toMainMenu={() => this.setState({ topNavigatorType: defaultNavigatorType}) }/>
     ) 
   }
 
@@ -648,6 +673,17 @@ const localStyles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     backgroundColor: 'hsla(205, 83%, 16%, 0.87)'
+  },
+  loadingBackImage: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: 'hsla(205, 83%, 16%, 0.87)'
+  },
+  loadingSkull: {
+    alignSelf: "center",
+    marginTop: 10,
+    height : '20%',
+    width : '40%',
   },
   welcomeText: {    
     fontFamily: 'Futura-CondensedExtraBold',
